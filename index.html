@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mayra Barbosa - CV Interactivo Experto</title>
+  <style>
+    /* ==========================================
+       ESTILOS PARA PANTALLA (WEB INTERACTIVA)
+       ========================================== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #1e1e1e;
+      color: #d4d4d4;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+      padding: 15px;
+      gap: 15px;
+    }
+    
+    #code-area {
+      flex: 1;
+      background: #121212;
+      padding: 20px;
+      overflow-y: auto;
+      border-radius: 8px;
+      border: 1px solid #333;
+      white-space: pre-wrap;
+      color: #a9dc76;
+    }
+
+    #view-area {
+      flex: 1.2;
+      background: #ffffff;
+      color: #333333;
+      padding: 30px;
+      overflow-y: auto;
+      border-radius: 8px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .cv-header h1 { color: #0a3d62; margin-bottom: 5px; font-size: 26px; font-weight: 700; }
+    .cv-subtitle { color: #2563eb; font-weight: 600; margin-bottom: 15px; font-size: 14px; }
+    .cv-contact { font-size: 13px; color: #666; margin-bottom: 25px; border-bottom: 2px solid #f1f5f9; padding-bottom: 15px; }
+    
+    .cv-section { 
+      margin-bottom: 15px; 
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #f8fafc;
+    }
+    
+    .cv-section-trigger {
+      width: 100%;
+      background: #0a3d62;
+      color: white;
+      padding: 12px 15px;
+      text-align: left;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.2s;
+    }
+    
+    .cv-section-trigger:hover { background: #1e3a8a; }
+    .cv-section-trigger::after {
+      content: '▶ Click para ejecutar';
+      font-size: 11px;
+      background: #2563eb;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    .cv-section.active .cv-section-trigger::after {
+      content: '⚡ Ejecutado';
+      background: #10b981;
+    }
+
+    .cv-content {
+      padding: 0;
+      max-height: 0;
+      opacity: 0;
+      transition: all 0.4s ease;
+      background: white;
+      font-size: 13px;
+    }
+
+    .cv-section.active .cv-content {
+      padding: 15px;
+      max-height: 1200px;
+      opacity: 1;
+    }
+
+    .cv-item { margin-bottom: 15px; border-bottom: 1px dashed #e2e8f0; padding-bottom: 10px; }
+    .cv-item:last-child { border: none; padding-bottom: 0; }
+    .cv-item-header { display: flex; justify-content: space-between; font-weight: bold; font-size: 14px; margin-bottom: 5px; color: #0f172a;}
+    .cv-lists { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    ul { padding-left: 18px; }
+    li { margin-bottom: 4px; color: #475569; }
+
+    .pdf-container { text-align: center; margin-top: 30px; }
+    .btn-pdf {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+      transition: all 0.2s;
+    }
+    .btn-pdf:hover { background: #1d4ed8; transform: translateY(-2px); }
+
+    /* Contenedor oculto en web, exclusivo para el PDF */
+    #print-area { display: none; }
+
+    @media (max-width: 850px) {
+      body { flex-direction: column; overflow-y: auto; height: auto; }
+      #code-area, #view-area { height: 450px; flex: none; }
+    }
+
+    /* ==========================================
+       ESTILOS DE IMPRESIÓN (EL PDF PERFECTO Y ATS)
+       ========================================== */
+    @media print {
+      @page {
+        size: letter;
+        margin: 18mm 20mm 18mm 20mm;
+      }
+      
+      body { background: #ffffff; color: #1e293b; display: block; height: auto; padding: 0; }
+      #code-area, #view-area { display: none !important; }
+      
+      #print-area {
+        display: block !important;
+        font-family: Arial, sans-serif;
+        line-height: 1.5;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .pdf-header { text-align: center; margin-bottom: 22px; }
+      .pdf-header h1 { color: #0a3d62; font-size: 24px; font-weight: bold; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;}
+      .pdf-header .pdf-title { color: #2563eb; font-size: 13px; font-weight: bold; margin-bottom: 6px; text-transform: uppercase;}
+      .pdf-header .pdf-meta { font-size: 11px; color: #475569; }
+
+      .pdf-section { margin-bottom: 20px; page-break-inside: avoid; }
+      .pdf-section h2 { 
+        color: #0a3d62; 
+        font-size: 13px; 
+        font-weight: bold; 
+        text-transform: uppercase; 
+        border-bottom: 2px solid #0a3d62; 
+        padding-bottom: 4px;
+        margin-bottom: 10px;
+        letter-spacing: 0.5px;
+      }
+
+      .pdf-job { margin-bottom: 14px; }
+      .pdf-job-title { font-weight: bold; font-size: 13px; color: #0f172a; }
+      .pdf-job-company { font-weight: normal; color: #475569; font-size: 12px; margin-bottom: 4px; }
+      
+      .pdf-section p, .pdf-section li { font-size: 12px; color: #334155; text-align: justify; }
+      .pdf-section ul { padding-left: 15px; margin-top: 4px; }
+      .pdf-section li { margin-bottom: 4px; }
+
+      .pdf-skills-group { margin-bottom: 8px; line-height: 1.6; }
+      .pdf-skills-group strong { font-size: 12px; color: #0f172a; }
+    }
+  </style>
+</head>
+<body>
+
+  <pre id="code-area"></pre>
+
+  <div id="view-area">
+    <div class="cv-header">
+      <h1>Mayra Elizabeth Barbosa Salas</h1>
+      <div class="cv-subtitle">Ingeniera en Sistemas Computacionales | Especialista en Soporte Técnico & Redes</div>
+      <div class="cv-contact">
+        📍 Guadalajara, Jal. | 📞 3326392729 | ✉️ mayra.barbosa1988@gmail.com
+      </div>
+    </div>
+
+    <div class="cv-section" id="sec-perfil">
+      <button class="cv-section-trigger" onclick="revealSection('sec-perfil')">Perfil Profesional</button>
+      <div class="cv-content" id="content-perfil"></div>
+    </div>
+
+    <div class="cv-section" id="sec-experiencia">
+      <button class="cv-section-trigger" onclick="revealSection('sec-experiencia')">Experiencia Profesional</button>
+      <div class="cv-content" id="content-experiencia"></div>
+    </div>
+
+    <div class="cv-section" id="sec-educacion">
+      <button class="cv-section-trigger" onclick="revealSection('sec-educacion')">Educación & Certificaciones</button>
+      <div class="cv-content" id="content-educacion"></div>
+    </div>
+
+    <div class="cv-section" id="sec-habilidades">
+      <button class="cv-section-trigger" onclick="revealSection('sec-habilidades')">Habilidades Técnicas y Blandas</button>
+      <div class="cv-content" id="content-habilidades"></div>
+    </div>
+
+    <div class="pdf-container">
+      <button class="btn-pdf" onclick="window.print()">Descargar CV Completo (PDF)</button>
+    </div>
+  </div>
+
+  <div id="print-area">
+    <div class="pdf-header">
+      <h1>Mayra Elizabeth Barbosa Salas</h1>
+      <div class="pdf-title">Ingeniera en Sistemas Computacionales | Especialista en Soporte Técnico & Redes</div>
+      <div class="pdf-meta">Guadalajara, Jalisco | Cel: 3326392729 | Email: mayra.barbosa1988@gmail.com</div>
+    </div>
+
+    <div class="pdf-section">
+      <h2>Perfil Profesional</h2>
+      <p>Ingeniera en Sistemas Computacionales con más de 10 años de trayectoria en soporte técnico, administración de redes LAN/WAN y optimización de servicios de TI. Especializada en la gestión de infraestructura de cómputo, diagnóstico de fallas de hardware/software, administración de servidores Tomcat/IIS y análisis de métricas en Power BI. Experta en el troubleshooting metodológico de incidencias, documentación técnica estructurada y coordinación efectiva de equipos de soporte.</p>
+    </div>
+
+    <div class="pdf-section">
+      <h2>Experiencia Profesional</h2>
+      
+      <div class="pdf-job">
+        <div class="pdf-job-title">Jefa de Soporte Técnico (2018 – 2020)</div>
+        <div class="pdf-job-company">Universidad de Guadalajara</div>
+        <ul>
+          <li>Coordinación operativa de un equipo de 20 personas y control de inventario de infraestructura de cómputo.</li>
+          <li>Administración, soporte y monitoreo de redes de datos LAN/WAN, videovigilancia y servidores locales Tomcat/IIS.</li>
+          <li>Supervisión de telefonía IP bajo conmutadores Grandstream, desarrollo de páginas web internas y creación de manuales de documentación técnica.</li>
+        </ul>
+      </div>
+
+      <div class="pdf-job">
+        <div class="pdf-job-title">Soporte Técnico (2020 – 2021)</div>
+        <div class="pdf-job-company">HP</div>
+        <ul>
+          <li>Atención presencial y remota a clientes corporativos para el diagnóstico de fallas y soporte de equipos de cómputo HP.</li>
+          <li>Registro detallado de tickets de servicio, validación técnica de casos de garantía y generación de cotizaciones de refacciones.</li>
+          <li>Resolución ágil de incidencias técnicas complejas enfocado en la fidelización y satisfacción del cliente.</li>
+        </ul>
+      </div>
+
+      <div class="pdf-job">
+        <div class="pdf-job-title">Analista de Operaciones (2021 – 2023)</div>
+        <div class="pdf-job-company">HEMAC Teleinformática</div>
+        <ul>
+          <li>Coordinación logística y técnica en campo de cuadrillas de trabajo para el despliegue del proyecto estatal Jalisco 2.0 en más de 600 sitios activos.</li>
+          <li>Extracción de datos operativos y modelado de reportes interactivos en Power BI para el seguimiento de KPIs internos.</li>
+          <li>Supervisión de entregables técnicos de conectividad e infraestructura asegurando el cumplimiento de los objetivos del proyecto.</li>
+        </ul>
+      </div>
+
+      <div class="pdf-job">
+        <div class="pdf-job-title">Desarrollo y Soporte Técnico (2024)</div>
+        <div class="pdf-job-company">Inttelec Networks</div>
+        <ul>
+          <li>Diagnóstico profundo y troubleshooting de hardware, ruteadores y soluciones tecnológicas de telecomunicación.</li>
+          <li>Elaboración formal de documentación de ingeniería, guías de usuario y manuales paso a paso para la base de conocimientos.</li>
+          <li>Investigación técnica y pruebas de laboratorio para la actualización constante y homologación de nuevos productos tecnológicos.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pdf-section">
+      <h2>Educación & Certificaciones</h2>
+      <div class="pdf-job">
+        <div class="pdf-job-title">Licenciatura en Sistemas Computacionales</div>
+        <div class="pdf-job-company">UDGVirtual — Egresada (2022 – 2024)</div>
+      </div>
+      <div class="pdf-job">
+        <div class="pdf-job-title">Tecnólogo Profesional en Sistemas Informáticos</div>
+        <div class="pdf-job-company">Escuela Politécnica de Guadalajara — Egresada (2014 – 2018)</div>
+      </div>
+      
+      <div style="margin-top: 12px;">
+        <p style="font-weight: bold; margin-bottom: 5px; color: #0f172a;">Certificaciones Oficiales:</p>
+        <ul>
+          <li>Certified Specialist Networking Solution & UCM – Grandstream</li>
+          <li>CCNA Routing & Switching – Cisco</li>
+          <li>UML – Análisis y Diseño Orientado a Objetos</li>
+          <li>Gestión de Sistemas y Bases de Datos</li>
+          <li>Atención a Clientes</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pdf-section">
+      <h2>Habilidades Técnicas y Blandas</h2>
+      <div class="pdf-skills-group">
+        <strong>Competencias Duras:</strong> Soporte Técnico Avanzado (Remoto y Presencial), Administración de Redes LAN/WAN, Telefonía IP VoIP, Diagnóstico Hardware/Software, Servidores Web (IIS y Tomcat), Análisis de Datos (Excel Avanzado, Reportes en Power BI), Gestión de Inventarios Informáticos.
+      </div>
+      <div class="pdf-skills-group">
+        <strong>Competencias Blandas:</strong> Liderazgo y Coordinación de Equipos, Comunicación Efectiva y Asertiva, Resolución de Problemas bajo Presión, Pensamiento Lógico y Analítico, Organización y Gestión Eficiente del Tiempo, Empatía con el Usuario.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Contenido exacto, defendible en entrevista y optimizado para ATS
+    const dataContent = {
+      'content-perfil': `<p style="color:#334155; text-align:justify;">Ingeniera en Sistemas Computacionales con más de 10 años de trayectoria en soporte técnico, administración de redes LAN/WAN y optimización de servicios de TI. Especializada en la gestión de infraestructura de cómputo, diagnóstico de fallas de hardware/software, administración de servidores Tomcat/IIS y análisis de métricas en Power BI. Experta en el troubleshooting metodológico de incidencias, documentación técnica estructurada y coordinación efectiva de equipos de soporte.</p>`,
+      
+      'content-experiencia': `
+        <div class="cv-item">
+          <div class="cv-item-header"><span>Jefa de Soporte Técnico — Universidad de Guadalajara</span><span>2018–2020</span></div>
+          <ul>
+            <li>Coordinación operativa de un equipo de 20 personas y control de inventario de infraestructura de cómputo.</li>
+            <li>Administración, soporte y monitoreo de redes de datos LAN/WAN, videovigilancia y servidores locales Tomcat/IIS.</li>
+            <li>Supervisión de telefonía IP bajo conmutadores Grandstream, desarrollo de páginas web internas y creación de manuales de documentación técnica.</li>
+          </ul>
+        </div>
+        <div class="cv-item">
+          <div class="cv-item-header"><span>Soporte Técnico — HP</span><span>2020–2021</span></div>
+          <ul>
+            <li>Atención presencial y remota a clientes corporativos para el diagnóstico de fallas y soporte de equipos de cómputo HP.</li>
+            <li>Registro detallado de tickets de servicio, validación técnica de casos de garantía y generación de cotizaciones de refacciones.</li>
+            <li>Resolución ágil de incidencias técnicas complejas enfocado en la fidelización y satisfacción del cliente.</li>
+          </ul>
+        </div>
+        <div class="cv-item">
+          <div class="cv-item-header"><span>Analista de Operaciones — HEMAC Teleinformática</span><span>2021–2023</span></div>
+          <ul>
+            <li>Coordinación logística y técnica en campo de cuadrillas de trabajo para el despliegue del proyecto estatal Jalisco 2.0 en más de 600 sitios activos.</li>
+            <li>Extracción de datos operativos y modelado de reportes interactivos en Power BI para el seguimiento de KPIs internos.</li>
+            <li>Supervisión de entregables técnicos de conectividad e infraestructura asegurando el cumplimiento de los objetivos del proyecto.</li>
+          </ul>
+        </div>
+        <div class="cv-item">
+          <div class="cv-item-header"><span>Desarrollo y Soporte Técnico — Inttelec Networks</span><span>2024</span></div>
+          <ul>
+            <li>Diagnóstico profundo y troubleshooting de hardware, ruteadores y soluciones tecnológicas de telecomunicación.</li>
+            <li>Elaboración formal de documentación de ingeniería, guías de usuario y manuales paso a paso para la base de conocimientos.</li>
+            <li>Investigación técnica y pruebas de laboratorio para la actualización constante y homologación de nuevos productos tecnológicos.</li>
+          </ul>
+        </div>`,
+
+      'content-educacion': `
+        <div class="cv-item">
+          <div class="cv-item-header"><span>Licenciatura en Sistemas Computacionales</span><span>UDGVirtual</span></div>
+          <p style="color:#64748b; font-size:12px; font-weight: 500;">Egresada (2022–2024)</p>
+        </div>
+        <div class="cv-item">
+          <div class="cv-item-header"><span>Tecnólogo Profesional en Sistemas Informáticos</span><span>Escuela Politécnica de Guadalajara</span></div>
+          <p style="color:#64748b; font-size:12px; font-weight: 500;">Egresada (2014–2018)</p>
+        </div>
+        <div style="margin-top:12px; border-top:1px solid #f1f5f9; padding-top:10px;">
+          <p style="font-weight:600; color:#0a3d62; margin-bottom:5px;">Certificaciones Oficiales:</p>
+          <ul>
+            <li>Certified Specialist Networking Solution & UCM – Grandstream</li>
+            <li>CCNA Routing & Switching – Cisco</li>
+            <li>UML – Análisis y Diseño Orientado a Objetos</li>
+            <li>Gestión de Sistemas y Bases de Datos</li>
+            <li>Atención a Clientes</li>
+          </ul>
+        </div>`,
+
+      'content-habilidades': `
+        <div class="cv-lists">
+          <div>
+            <strong style="color:#0a3d62;">Competencias Duras</strong>
+            <ul style="margin-top:5px;">
+              <li>Soporte Técnico (Remoto/Presencial)</li>
+              <li>Administración de Redes LAN/WAN</li>
+              <li>Telefonía IP VoIP & Grandstream</li>
+              <li>Servidores Web (IIS / Tomcat)</li>
+              <li>Análisis de Datos (Power BI / Excel)</li>
+              <li>Diagnóstico Hardware/Software</li>
+            </ul>
+          </div>
+          <div>
+            <strong style="color:#0a3d62;">Competencias Blandas</strong>
+            <ul style="margin-top:5px;">
+              <li>Liderazgo y Coordinación</li>
+              <li>Comunicación Efectiva y Asertiva</li>
+              <li>Resolución de Problemas bajo Presión</li>
+              <li>Pensamiento Lógico y Analítico</li>
+              <li>Organización del Tiempo</li>
+            </ul>
+          </div>
+        </div>`
+    };
+
+    const introCode = `/**
+ * INITIALIZING CORE SYSTEM...
+ * -> Loading Mayra_Barbosa_CV_OS_v4.0
+ * -> Aligning Real Technical Background... [OK]
+ * -> Status: Connected & 100% Interview Ready
+ * Despliegue listo. Interfaz de usuario montada.
+ * [SISTEMA]: Por favor, ejecute los módulos en la derecha.
+ */\n`;
+
+    const codeArea = document.getElementById('code-area');
+    const viewArea = document.getElementById('view-area');
+    let index = 0;
+
+    function typeIntro() {
+      if (index < introCode.length) {
+        codeArea.innerHTML += introCode.charAt(index);
+        index++;
+        codeArea.scrollTop = codeArea.scrollHeight;
+        setTimeout(typeIntro, 10);
+      } else {
+        viewArea.style.opacity = "1";
+        viewArea.style.transform = "translateY(0)";
+      }
+    }
+
+    function revealSection(sectionId) {
+      const sectionNode = document.getElementById(sectionId);
+      const contentNode = sectionNode.querySelector('.cv-content');
+      if (sectionNode.classList.contains('active')) return;
+
+      codeArea.innerHTML += `\n$ run system.modules.load('${sectionId.toUpperCase()}')\n>> Cargando recursos reales verificados... [OK]`;
+      codeArea.scrollTop = codeArea.scrollHeight;
+
+      sectionNode.classList.add('active');
+      contentNode.innerHTML = dataContent[contentNode.id];
+    }
+
+    window.onload = typeIntro;
+  </script>
+</body>
+</html>

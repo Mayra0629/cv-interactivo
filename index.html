@@ -3,437 +3,2592 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mayra Barbosa - CV Interactivo Experto</title>
+
+  <meta name="description"
+        content="Mayra Barbosa - Ingeniera en Sistemas Computacionales. Experiencia en soporte técnico, redes, infraestructura TI, VoIP, Power BI y operaciones.">
+
+  <meta name="author" content="Mayra Elizabeth Barbosa Salas">
+
+  <title>Mayra Barbosa | Ingeniera en Sistemas Computacionales</title>
+
   <style>
-    /* ==========================================
-       ESTILOS PARA PANTALLA (WEB INTERACTIVA)
-       ========================================== */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* =========================================================
+       RESET
+       ========================================================= */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background-color: #1e1e1e;
+      background: #0f172a;
       color: #d4d4d4;
-      font-family: 'Courier New', Courier, monospace;
+      font-family: "Courier New", Courier, monospace;
       font-size: 14px;
-      display: flex;
-      height: 100vh;
+      min-height: 100vh;
       overflow: hidden;
       padding: 15px;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+
+    /* =========================================================
+       LAYOUT PRINCIPAL
+       ========================================================= */
+
+    .app {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.8fr) minmax(450px, 1.2fr);
       gap: 15px;
+      height: calc(100vh - 30px);
     }
-    
+
+
+    /* =========================================================
+       TERMINAL
+       ========================================================= */
+
     #code-area {
-      flex: 1;
-      background: #121212;
-      padding: 20px;
+      position: relative;
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 0;
       overflow-y: auto;
-      border-radius: 8px;
-      border: 1px solid #333;
+      color: #94a3b8;
       white-space: pre-wrap;
-      color: #a9dc76;
+      line-height: 1.65;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
     }
+
+    .terminal-header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 10px 14px;
+
+      background: #0b1220;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .terminal-dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .terminal-title {
+      font-size: 10px;
+      color: #64748b;
+      letter-spacing: 0.5px;
+    }
+
+    .terminal-body {
+      padding: 18px;
+      min-height: calc(100% - 42px);
+    }
+
+    .terminal-prompt {
+      color: #60a5fa;
+    }
+
+    .terminal-success {
+      color: #4ade80;
+    }
+
+    .terminal-info {
+      color: #94a3b8;
+    }
+
+    .terminal-warning {
+      color: #fbbf24;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 15px;
+      background: #60a5fa;
+      vertical-align: middle;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+
+    /* =========================================================
+       ÁREA DEL CV
+       ========================================================= */
 
     #view-area {
-      flex: 1.2;
       background: #ffffff;
-      color: #333333;
-      padding: 30px;
+      color: #334155;
+
+      padding: 32px;
+
       overflow-y: auto;
-      border-radius: 8px;
+
+      border-radius: 10px;
+
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-      font-family: system-ui, -apple-system, sans-serif;
+
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+
+      font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.18);
     }
 
-    .cv-header h1 { color: #0a3d62; margin-bottom: 5px; font-size: 26px; font-weight: 700; }
-    .cv-subtitle { color: #2563eb; font-weight: 600; margin-bottom: 15px; font-size: 14px; }
-    .cv-contact { font-size: 13px; color: #666; margin-bottom: 25px; border-bottom: 2px solid #f1f5f9; padding-bottom: 15px; }
-    
-    .cv-section { 
-      margin-bottom: 15px; 
-      border: 1px solid #e2e8f0;
-      border-radius: 6px;
-      overflow: hidden;
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+
+    .hero {
+      position: relative;
+      padding-bottom: 25px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 6px 10px;
+
+      border: 1px solid #dbeafe;
+      border-radius: 999px;
+
+      background: #eff6ff;
+
+      color: #2563eb;
+
+      font-family: monospace;
+      font-size: 10px;
+      font-weight: 700;
+
+      letter-spacing: 0.8px;
+
+      margin-bottom: 14px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: #22c55e;
+
+      box-shadow:
+        0 0 0 3px rgba(34, 197, 94, 0.12),
+        0 0 8px rgba(34, 197, 94, 0.4);
+    }
+
+    .hero h1 {
+      color: #0f172a;
+      font-size: clamp(30px, 4vw, 42px);
+      line-height: 1.05;
+      margin-bottom: 8px;
+      letter-spacing: -1px;
+    }
+
+    .hero-title {
+      color: #2563eb;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .hero-description {
+      max-width: 720px;
+
+      color: #64748b;
+
+      font-size: 14px;
+      line-height: 1.7;
+
+      margin-bottom: 18px;
+    }
+
+    .hero-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 15px;
+
+      color: #64748b;
+
+      font-size: 12px;
+
+      margin-bottom: 20px;
+    }
+
+    .hero-contact span {
+      white-space: nowrap;
+    }
+
+
+    /* =========================================================
+       BOTONES
+       ========================================================= */
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      border: none;
+
+      padding: 11px 17px;
+
+      border-radius: 7px;
+
+      cursor: pointer;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: #ffffff;
+
+      box-shadow:
+        0 5px 15px rgba(37, 99, 235, 0.22);
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: #334155;
+
+      border: 1px solid #cbd5e1;
+    }
+
+    .btn-secondary:hover {
       background: #f8fafc;
     }
-    
+
+    .btn-whatsapp {
+      background: #16a34a;
+      color: white;
+    }
+
+    .btn-whatsapp:hover {
+      background: #15803d;
+    }
+
+
+    /* =========================================================
+       ESTADÍSTICAS
+       ========================================================= */
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+
+      margin-bottom: 22px;
+    }
+
+    .stat {
+      padding: 15px;
+
+      background: #f8fafc;
+
+      border: 1px solid #e2e8f0;
+
+      border-radius: 8px;
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 8px 20px rgba(15, 23, 42, 0.07);
+    }
+
+    .stat strong {
+      display: block;
+
+      color: #0a3d62;
+
+      font-size: 24px;
+      line-height: 1;
+
+      margin-bottom: 6px;
+    }
+
+    .stat span {
+      display: block;
+
+      color: #64748b;
+
+      font-family: monospace;
+
+      font-size: 9px;
+
+      line-height: 1.4;
+
+      letter-spacing: 0.3px;
+    }
+
+
+    /* =========================================================
+       SECCIONES
+       ========================================================= */
+
+    .cv-section {
+      margin-bottom: 12px;
+
+      border: 1px solid #e2e8f0;
+
+      border-radius: 8px;
+
+      overflow: hidden;
+
+      background: #f8fafc;
+    }
+
     .cv-section-trigger {
       width: 100%;
+
       background: #0a3d62;
+
       color: white;
-      padding: 12px 15px;
+
+      padding: 13px 15px;
+
       text-align: left;
-      font-size: 15px;
-      font-weight: 600;
+
+      font-size: 14px;
+      font-weight: 700;
+
       border: none;
+
       cursor: pointer;
+
       display: flex;
+
       justify-content: space-between;
+
       align-items: center;
-      transition: background 0.2s;
+
+      transition:
+        background 0.2s ease;
     }
-    
-    .cv-section-trigger:hover { background: #1e3a8a; }
-    .cv-section-trigger::after {
-      content: '▶ Click para ejecutar';
-      font-size: 11px;
-      background: #2563eb;
-      padding: 3px 8px;
-      border-radius: 4px;
+
+    .cv-section-trigger:hover {
+      background: #123f61;
+    }
+
+    .trigger-label {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .trigger-icon {
+      color: #60a5fa;
       font-family: monospace;
     }
 
-    .cv-section.active .cv-section-trigger::after {
-      content: '⚡ Ejecutado';
-      background: #10b981;
+    .trigger-status {
+      font-family: monospace;
+
+      font-size: 9px;
+
+      color: #bfdbfe;
+
+      background: rgba(37, 99, 235, 0.35);
+
+      padding: 4px 7px;
+
+      border-radius: 4px;
+    }
+
+    .cv-section.active .trigger-status {
+      background: rgba(16, 185, 129, 0.9);
+      color: white;
     }
 
     .cv-content {
       padding: 0;
+
       max-height: 0;
+
       opacity: 0;
-      transition: all 0.4s ease;
+
+      overflow: hidden;
+
+      transition:
+        max-height 0.45s ease,
+        opacity 0.35s ease,
+        padding 0.35s ease;
+
       background: white;
+
       font-size: 13px;
     }
 
     .cv-section.active .cv-content {
-      padding: 15px;
-      max-height: 1200px;
+      padding: 17px;
+
+      max-height: 2500px;
+
       opacity: 1;
     }
 
-    .cv-item { margin-bottom: 15px; border-bottom: 1px dashed #e2e8f0; padding-bottom: 10px; }
-    .cv-item:last-child { border: none; padding-bottom: 0; }
-    .cv-item-header { display: flex; justify-content: space-between; font-weight: bold; font-size: 14px; margin-bottom: 5px; color: #0f172a;}
-    .cv-lists { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-    ul { padding-left: 18px; }
-    li { margin-bottom: 4px; color: #475569; }
 
-    .pdf-container { text-align: center; margin-top: 30px; }
-    .btn-pdf {
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      font-size: 14px;
-      font-weight: bold;
-      border-radius: 6px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
-      transition: all 0.2s;
+    /* =========================================================
+       EXPERIENCIA
+       ========================================================= */
+
+    .cv-item {
+      margin-bottom: 18px;
+
+      border-bottom: 1px dashed #e2e8f0;
+
+      padding-bottom: 14px;
     }
-    .btn-pdf:hover { background: #1d4ed8; transform: translateY(-2px); }
 
-    /* Contenedor oculto en web, exclusivo para el PDF */
-    #print-area { display: none; }
+    .cv-item:last-child {
+      border: none;
+
+      padding-bottom: 0;
+
+      margin-bottom: 0;
+    }
+
+    .cv-item-header {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 15px;
+
+      font-weight: 700;
+
+      font-size: 14px;
+
+      margin-bottom: 7px;
+
+      color: #0f172a;
+    }
+
+    .cv-item-date {
+      color: #2563eb;
+
+      font-family: monospace;
+
+      white-space: nowrap;
+
+      font-size: 11px;
+    }
+
+    .cv-company {
+      color: #64748b;
+
+      font-size: 12px;
+
+      margin-bottom: 7px;
+    }
+
+    ul {
+      padding-left: 18px;
+    }
+
+    li {
+      margin-bottom: 5px;
+
+      color: #475569;
+
+      line-height: 1.5;
+    }
+
+
+    /* =========================================================
+       PROYECTOS
+       ========================================================= */
+
+    .project-grid {
+      display: grid;
+
+      grid-template-columns: repeat(2, 1fr);
+
+      gap: 12px;
+    }
+
+    .project-card {
+      position: relative;
+
+      padding: 17px;
+
+      border: 1px solid #e2e8f0;
+
+      border-radius: 8px;
+
+      background: #ffffff;
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+
+      box-shadow:
+        0 8px 22px rgba(15, 23, 42, 0.08);
+    }
+
+    .project-number {
+      color: #2563eb;
+
+      font-family: monospace;
+
+      font-size: 10px;
+
+      margin-bottom: 8px;
+    }
+
+    .project-card h3 {
+      color: #0f172a;
+
+      font-size: 15px;
+
+      margin-bottom: 5px;
+    }
+
+    .project-tech {
+      display: inline-block;
+
+      color: #2563eb;
+
+      font-family: monospace;
+
+      font-size: 9px;
+
+      margin-bottom: 9px;
+    }
+
+    .project-card p {
+      color: #475569;
+
+      font-size: 12px;
+
+      line-height: 1.6;
+    }
+
+
+    /* =========================================================
+       SKILLS
+       ========================================================= */
+
+    .cv-lists {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 20px;
+    }
+
+    .skill-column {
+      padding: 15px;
+
+      background: #f8fafc;
+
+      border: 1px solid #e2e8f0;
+
+      border-radius: 8px;
+    }
+
+    .skill-title {
+      color: #0a3d62;
+
+      font-weight: 700;
+
+      font-size: 13px;
+
+      margin-bottom: 9px;
+    }
+
+
+    /* =========================================================
+       EDUCACIÓN
+       ========================================================= */
+
+    .certifications {
+      margin-top: 14px;
+
+      padding-top: 12px;
+
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .certifications-title {
+      color: #0a3d62;
+
+      font-weight: 700;
+
+      margin-bottom: 7px;
+    }
+
+
+    /* =========================================================
+       FOOTER WEB
+       ========================================================= */
+
+    .web-footer {
+      text-align: center;
+
+      color: #94a3b8;
+
+      font-family: monospace;
+
+      font-size: 10px;
+
+      padding: 25px 0 10px;
+    }
+
+    .web-footer strong {
+      color: #2563eb;
+    }
+
+
+    /* =========================================================
+       PDF / IMPRESIÓN
+       ========================================================= */
+
+    #print-area {
+      display: none;
+    }
+
+
+    /* =========================================================
+       TABLET
+       ========================================================= */
+
+    @media (max-width: 1050px) {
+
+      .app {
+        grid-template-columns: 0.65fr 1.35fr;
+      }
+
+      #view-area {
+        padding: 25px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+    }
+
+
+    /* =========================================================
+       MÓVIL
+       ========================================================= */
 
     @media (max-width: 850px) {
-      body { flex-direction: column; overflow-y: auto; height: auto; }
-      #code-area, #view-area { height: 450px; flex: none; }
+
+      body {
+        overflow-y: auto;
+
+        padding: 8px;
+      }
+
+      .app {
+        display: flex;
+
+        flex-direction: column;
+
+        height: auto;
+
+        gap: 10px;
+      }
+
+      #code-area {
+        height: 155px;
+
+        flex: none;
+      }
+
+      .terminal-body {
+        padding: 12px;
+
+        font-size: 11px;
+      }
+
+      #view-area {
+        height: auto;
+
+        min-height: calc(100vh - 175px);
+
+        padding: 18px;
+
+        overflow: visible;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      .hero-title {
+        font-size: 14px;
+      }
+
+      .hero-description {
+        font-size: 13px;
+      }
+
+      .hero-contact {
+        flex-direction: column;
+
+        gap: 5px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cv-lists {
+        grid-template-columns: 1fr;
+      }
+
+      .cv-item-header {
+        flex-direction: column;
+
+        gap: 4px;
+      }
+
+      .cv-item-date {
+        white-space: normal;
+      }
+
+      .cv-section-trigger {
+        font-size: 12px;
+      }
+
+      .trigger-status {
+        display: none;
+      }
+
     }
 
-    /* ==========================================
-       ESTILOS DE IMPRESIÓN (EL PDF PERFECTO Y ATS)
-       ========================================== */
+
+    /* =========================================================
+       MÓVILES PEQUEÑOS
+       ========================================================= */
+
+    @media (max-width: 430px) {
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 7px;
+      }
+
+      .stat {
+        padding: 12px;
+      }
+
+      .stat strong {
+        font-size: 21px;
+      }
+
+      .stat span {
+        font-size: 8px;
+      }
+
+      #view-area {
+        padding: 14px;
+      }
+
+      .hero h1 {
+        font-size: 27px;
+      }
+
+      .cv-section.active .cv-content {
+        padding: 13px;
+      }
+
+    }
+
+
+    /* =========================================================
+       IMPRESIÓN ATS
+       ========================================================= */
+
     @media print {
+
       @page {
         size: letter;
-        margin: 18mm 20mm 18mm 20mm;
+
+        margin:
+          15mm
+          18mm
+          15mm
+          18mm;
       }
-      
-      body { background: #ffffff; color: #1e293b; display: block; height: auto; padding: 0; }
-      #code-area, #view-area { display: none !important; }
-      
+
+      html,
+      body {
+        background: #ffffff !important;
+
+        color: #1e293b !important;
+
+        display: block !important;
+
+        height: auto !important;
+
+        min-height: 0 !important;
+
+        overflow: visible !important;
+
+        padding: 0 !important;
+
+        margin: 0 !important;
+      }
+
+      .app {
+        display: none !important;
+      }
+
       #print-area {
         display: block !important;
-        font-family: Arial, sans-serif;
-        line-height: 1.5;
+
         width: 100%;
-        margin: 0 auto;
+
+        font-family:
+          Arial,
+          Helvetica,
+          sans-serif;
+
+        color: #1e293b;
+
+        line-height: 1.45;
       }
 
-      .pdf-header { text-align: center; margin-bottom: 22px; }
-      .pdf-header h1 { color: #0a3d62; font-size: 24px; font-weight: bold; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;}
-      .pdf-header .pdf-title { color: #2563eb; font-size: 13px; font-weight: bold; margin-bottom: 6px; text-transform: uppercase;}
-      .pdf-header .pdf-meta { font-size: 11px; color: #475569; }
+      .pdf-header {
+        text-align: center;
 
-      .pdf-section { margin-bottom: 20px; page-break-inside: avoid; }
-      .pdf-section h2 { 
-        color: #0a3d62; 
-        font-size: 13px; 
-        font-weight: bold; 
-        text-transform: uppercase; 
-        border-bottom: 2px solid #0a3d62; 
-        padding-bottom: 4px;
+        margin-bottom: 17px;
+      }
+
+      .pdf-header h1 {
+        color: #0a3d62;
+
+        font-size: 22px;
+
+        font-weight: bold;
+
+        margin-bottom: 3px;
+
+        text-transform: uppercase;
+
+        letter-spacing: 0.4px;
+      }
+
+      .pdf-title {
+        color: #2563eb;
+
+        font-size: 11px;
+
+        font-weight: bold;
+
+        margin-bottom: 5px;
+
+        text-transform: uppercase;
+      }
+
+      .pdf-meta {
+        color: #475569;
+
+        font-size: 9.5px;
+      }
+
+      .pdf-section {
+        margin-bottom: 14px;
+
+        page-break-inside: avoid;
+      }
+
+      .pdf-section h2 {
+        color: #0a3d62;
+
+        font-size: 11.5px;
+
+        font-weight: bold;
+
+        text-transform: uppercase;
+
+        border-bottom: 1.5px solid #0a3d62;
+
+        padding-bottom: 3px;
+
+        margin-bottom: 7px;
+
+        letter-spacing: 0.4px;
+      }
+
+      .pdf-section p,
+      .pdf-section li {
+        color: #334155;
+
+        font-size: 9.5px;
+
+        line-height: 1.45;
+
+        text-align: left;
+      }
+
+      .pdf-section ul {
+        padding-left: 14px;
+
+        margin-top: 3px;
+      }
+
+      .pdf-section li {
+        margin-bottom: 3px;
+      }
+
+      .pdf-job {
         margin-bottom: 10px;
-        letter-spacing: 0.5px;
+
+        page-break-inside: avoid;
       }
 
-      .pdf-job { margin-bottom: 14px; }
-      .pdf-job-title { font-weight: bold; font-size: 13px; color: #0f172a; }
-      .pdf-job-company { font-weight: normal; color: #475569; font-size: 12px; margin-bottom: 4px; }
-      
-      .pdf-section p, .pdf-section li { font-size: 12px; color: #334155; text-align: justify; }
-      .pdf-section ul { padding-left: 15px; margin-top: 4px; }
-      .pdf-section li { margin-bottom: 4px; }
+      .pdf-job-title {
+        color: #0f172a;
 
-      .pdf-skills-group { margin-bottom: 8px; line-height: 1.6; }
-      .pdf-skills-group strong { font-size: 12px; color: #0f172a; }
+        font-size: 10.5px;
+
+        font-weight: bold;
+      }
+
+      .pdf-job-company {
+        color: #475569;
+
+        font-size: 9.5px;
+
+        margin-bottom: 3px;
+      }
+
+      .pdf-project {
+        margin-bottom: 8px;
+      }
+
+      .pdf-project strong {
+        color: #0f172a;
+
+        font-size: 10px;
+      }
+
+      .pdf-skills-group {
+        margin-bottom: 6px;
+
+        line-height: 1.5;
+      }
+
+      .pdf-skills-group strong {
+        color: #0f172a;
+
+        font-size: 9.5px;
+      }
+
+      .pdf-footer {
+        margin-top: 10px;
+
+        padding-top: 6px;
+
+        border-top: 1px solid #cbd5e1;
+
+        color: #64748b;
+
+        font-size: 8.5px;
+
+        text-align: center;
+      }
+
     }
+
   </style>
 </head>
+
+
 <body>
 
-  <pre id="code-area"></pre>
 
-  <div id="view-area">
-    <div class="cv-header">
-      <h1>Mayra Elizabeth Barbosa Salas</h1>
-      <div class="cv-subtitle">Ingeniera en Sistemas Computacionales | Especialista en Soporte Técnico & Redes</div>
-      <div class="cv-contact">
-        📍 Guadalajara, Jal. | 📞 3326392729 | ✉️ mayra.barbosa1988@gmail.com
+  <!-- =======================================================
+       APLICACIÓN
+       ======================================================= -->
+
+  <div class="app">
+
+
+    <!-- =====================================================
+         TERMINAL
+         ===================================================== -->
+
+    <div id="code-area">
+
+      <div class="terminal-header">
+
+        <div class="terminal-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="terminal-title">
+          MAYRA_BARBOSA@SYSTEMS — CV_OS
+        </div>
+
       </div>
+
+      <div class="terminal-body" id="terminal-body"></div>
+
     </div>
 
-    <div class="cv-section" id="sec-perfil">
-      <button class="cv-section-trigger" onclick="revealSection('sec-perfil')">Perfil Profesional</button>
-      <div class="cv-content" id="content-perfil"></div>
-    </div>
 
-    <div class="cv-section" id="sec-experiencia">
-      <button class="cv-section-trigger" onclick="revealSection('sec-experiencia')">Experiencia Profesional</button>
-      <div class="cv-content" id="content-experiencia"></div>
-    </div>
+    <!-- =====================================================
+         CV WEB
+         ===================================================== -->
 
-    <div class="cv-section" id="sec-educacion">
-      <button class="cv-section-trigger" onclick="revealSection('sec-educacion')">Educación & Certificaciones</button>
-      <div class="cv-content" id="content-educacion"></div>
-    </div>
+    <main id="view-area">
 
-    <div class="cv-section" id="sec-habilidades">
-      <button class="cv-section-trigger" onclick="revealSection('sec-habilidades')">Habilidades Técnicas y Blandas</button>
-      <div class="cv-content" id="content-habilidades"></div>
-    </div>
 
-    <div class="pdf-container">
-      <button class="btn-pdf" onclick="window.print()">Descargar CV Completo (PDF)</button>
-    </div>
+      <!-- ===================================================
+           HERO
+           =================================================== -->
+
+      <section class="hero">
+
+        <div class="hero-badge">
+          <span class="status-dot"></span>
+          SISTEMAS · INFRAESTRUCTURA · SOPORTE TI
+        </div>
+
+        <h1>Mayra Barbosa</h1>
+
+        <div class="hero-title">
+          Ingeniera en Sistemas Computacionales
+        </div>
+
+        <p class="hero-description">
+          Más de 10 años de experiencia en soporte técnico,
+          infraestructura de TI, redes, telecomunicaciones,
+          análisis de datos y coordinación de operaciones.
+        </p>
+
+        <div class="hero-contact">
+
+          <span>📍 Guadalajara, Jalisco</span>
+
+          <span>📞 33 2639 2729</span>
+
+          <span>✉️ mayra.barbosa1988@gmail.com</span>
+
+        </div>
+
+        <div class="hero-actions">
+
+          <button
+            class="btn btn-primary"
+            onclick="window.print()">
+            ↓ DESCARGAR CV
+          </button>
+
+          <button
+            class="btn btn-secondary"
+            onclick="scrollToSection('sec-experiencia')">
+            VER EXPERIENCIA →
+          </button>
+
+          <button
+            class="btn btn-whatsapp"
+            onclick="openWhatsApp()">
+            WHATSAPP
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           ESTADÍSTICAS
+           =================================================== -->
+
+      <section class="stats-grid">
+
+        <div class="stat">
+          <strong>10+</strong>
+          <span>AÑOS DE EXPERIENCIA</span>
+        </div>
+
+        <div class="stat">
+          <strong>600+</strong>
+          <span>SITIOS DE INFRAESTRUCTURA</span>
+        </div>
+
+        <div class="stat">
+          <strong>20</strong>
+          <span>PERSONAS COORDINADAS</span>
+        </div>
+
+        <div class="stat">
+          <strong>TI</strong>
+          <span>REDES · SOPORTE · VoIP · DATOS</span>
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           PERFIL
+           =================================================== -->
+
+      <section class="cv-section" id="sec-perfil">
+
+        <button
+          class="cv-section-trigger"
+          onclick="revealSection('sec-perfil')">
+
+          <span class="trigger-label">
+            <span class="trigger-icon">01</span>
+            Perfil Profesional
+          </span>
+
+          <span class="trigger-status">
+            ABRIR MÓDULO →
+          </span>
+
+        </button>
+
+        <div
+          class="cv-content"
+          id="content-perfil">
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           EXPERIENCIA
+           =================================================== -->
+
+      <section class="cv-section" id="sec-experiencia">
+
+        <button
+          class="cv-section-trigger"
+          onclick="revealSection('sec-experiencia')">
+
+          <span class="trigger-label">
+            <span class="trigger-icon">02</span>
+            Experiencia Profesional
+          </span>
+
+          <span class="trigger-status">
+            ABRIR MÓDULO →
+          </span>
+
+        </button>
+
+        <div
+          class="cv-content"
+          id="content-experiencia">
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           PROYECTOS
+           =================================================== -->
+
+      <section class="cv-section" id="sec-proyectos">
+
+        <button
+          class="cv-section-trigger"
+          onclick="revealSection('sec-proyectos')">
+
+          <span class="trigger-label">
+            <span class="trigger-icon">03</span>
+            Proyectos Destacados
+          </span>
+
+          <span class="trigger-status">
+            ABRIR MÓDULO →
+          </span>
+
+        </button>
+
+        <div
+          class="cv-content"
+          id="content-proyectos">
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           EDUCACIÓN
+           =================================================== -->
+
+      <section class="cv-section" id="sec-educacion">
+
+        <button
+          class="cv-section-trigger"
+          onclick="revealSection('sec-educacion')">
+
+          <span class="trigger-label">
+            <span class="trigger-icon">04</span>
+            Educación & Certificaciones
+          </span>
+
+          <span class="trigger-status">
+            ABRIR MÓDULO →
+          </span>
+
+        </button>
+
+        <div
+          class="cv-content"
+          id="content-educacion">
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           HABILIDADES
+           =================================================== -->
+
+      <section class="cv-section" id="sec-habilidades">
+
+        <button
+          class="cv-section-trigger"
+          onclick="revealSection('sec-habilidades')">
+
+          <span class="trigger-label">
+            <span class="trigger-icon">05</span>
+            Habilidades Técnicas y Blandas
+          </span>
+
+          <span class="trigger-status">
+            ABRIR MÓDULO →
+          </span>
+
+        </button>
+
+        <div
+          class="cv-content"
+          id="content-habilidades">
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           FOOTER
+           =================================================== -->
+
+      <footer class="web-footer">
+
+        <strong>MAYRA_BARBOSA@SYSTEMS</strong>
+
+        <br>
+
+        CV interactivo ·
+        Información profesional verificable
+
+      </footer>
+
+
+    </main>
+
   </div>
+
+
+
+  <!-- =======================================================
+       ÁREA EXCLUSIVA PARA PDF
+       ======================================================= -->
 
   <div id="print-area">
-    <div class="pdf-header">
+
+
+    <!-- =====================================================
+         HEADER PDF
+         ===================================================== -->
+
+    <header class="pdf-header">
+
       <h1>Mayra Elizabeth Barbosa Salas</h1>
-      <div class="pdf-title">Ingeniera en Sistemas Computacionales | Especialista en Soporte Técnico & Redes</div>
-      <div class="pdf-meta">Guadalajara, Jalisco | Cel: 3326392729 | Email: mayra.barbosa1988@gmail.com</div>
-    </div>
 
-    <div class="pdf-section">
+      <div class="pdf-title">
+        Ingeniera en Sistemas Computacionales |
+        Soporte Técnico · Redes · Infraestructura TI
+      </div>
+
+      <div class="pdf-meta">
+        Guadalajara, Jalisco |
+        Cel. 33 2639 2729 |
+        mayra.barbosa1988@gmail.com
+      </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         PERFIL PDF
+         ===================================================== -->
+
+    <section class="pdf-section">
+
       <h2>Perfil Profesional</h2>
-      <p>Ingeniera en Sistemas Computacionales con más de 10 años de trayectoria en soporte técnico, administración de redes LAN/WAN y optimización de servicios de TI. Especializada en la gestión de infraestructura de cómputo, diagnóstico de fallas de hardware/software, administración de servidores Tomcat/IIS y análisis de métricas en Power BI. Experta en el troubleshooting metodológico de incidencias, documentación técnica estructurada y coordinación efectiva de equipos de soporte.</p>
-    </div>
 
-    <div class="pdf-section">
+      <p>
+        Ingeniera en Sistemas Computacionales con más de 10 años
+        de trayectoria en soporte técnico, infraestructura de TI,
+        administración de redes LAN/WAN, telecomunicaciones y
+        análisis de información. Experiencia en diagnóstico de
+        hardware y software, administración de servidores
+        Tomcat/IIS, telefonía IP, Power BI, Excel y coordinación
+        de equipos de soporte. Orientada al diagnóstico,
+        documentación y resolución estructurada de incidencias.
+      </p>
+
+    </section>
+
+
+    <!-- =====================================================
+         EXPERIENCIA PDF
+         ===================================================== -->
+
+    <section class="pdf-section">
+
       <h2>Experiencia Profesional</h2>
-      
-      <div class="pdf-job">
-        <div class="pdf-job-title">Jefa de Soporte Técnico (2018 – 2020)</div>
-        <div class="pdf-job-company">Universidad de Guadalajara</div>
-        <ul>
-          <li>Coordinación operativa de un equipo de 20 personas y control de inventario de infraestructura de cómputo.</li>
-          <li>Administración, soporte y monitoreo de redes de datos LAN/WAN, videovigilancia y servidores locales Tomcat/IIS.</li>
-          <li>Supervisión de telefonía IP bajo conmutadores Grandstream, desarrollo de páginas web internas y creación de manuales de documentación técnica.</li>
-        </ul>
-      </div>
+
 
       <div class="pdf-job">
-        <div class="pdf-job-title">Soporte Técnico (2020 – 2021)</div>
-        <div class="pdf-job-company">HP</div>
+
+        <div class="pdf-job-title">
+          Jefa de Soporte Técnico — Universidad de Guadalajara
+          | 2018 – 2020
+        </div>
+
         <ul>
-          <li>Atención presencial y remota a clientes corporativos para el diagnóstico de fallas y soporte de equipos de cómputo HP.</li>
-          <li>Registro detallado de tickets de servicio, validación técnica de casos de garantía y generación de cotizaciones de refacciones.</li>
-          <li>Resolución ágil de incidencias técnicas complejas enfocado en la fidelización y satisfacción del cliente.</li>
+
+          <li>
+            Coordinación operativa de un equipo de 20 personas
+            y control de inventario de infraestructura de cómputo.
+          </li>
+
+          <li>
+            Administración, soporte y monitoreo de redes de datos
+            LAN/WAN, videovigilancia y servidores locales
+            Tomcat/IIS.
+          </li>
+
+          <li>
+            Supervisión de telefonía IP mediante soluciones
+            Grandstream, desarrollo de páginas web internas y
+            elaboración de manuales de documentación técnica.
+          </li>
+
         </ul>
+
       </div>
 
-      <div class="pdf-job">
-        <div class="pdf-job-title">Analista de Operaciones (2021 – 2023)</div>
-        <div class="pdf-job-company">HEMAC Teleinformática</div>
-        <ul>
-          <li>Coordinación logística y técnica en campo de cuadrillas de trabajo para el despliegue del proyecto estatal Jalisco 2.0 en más de 600 sitios activos.</li>
-          <li>Extracción de datos operativos y modelado de reportes interactivos en Power BI para el seguimiento de KPIs internos.</li>
-          <li>Supervisión de entregables técnicos de conectividad e infraestructura asegurando el cumplimiento de los objetivos del proyecto.</li>
-        </ul>
-      </div>
 
       <div class="pdf-job">
-        <div class="pdf-job-title">Desarrollo y Soporte Técnico (2024)</div>
-        <div class="pdf-job-company">Inttelec Networks</div>
-        <ul>
-          <li>Diagnóstico profundo y troubleshooting de hardware, ruteadores y soluciones tecnológicas de telecomunicación.</li>
-          <li>Elaboración formal de documentación de ingeniería, guías de usuario y manuales paso a paso para la base de conocimientos.</li>
-          <li>Investigación técnica y pruebas de laboratorio para la actualización constante y homologación de nuevos productos tecnológicos.</li>
-        </ul>
-      </div>
-    </div>
 
-    <div class="pdf-section">
-      <h2>Educación & Certificaciones</h2>
-      <div class="pdf-job">
-        <div class="pdf-job-title">Licenciatura en Sistemas Computacionales</div>
-        <div class="pdf-job-company">UDGVirtual — Egresada (2022 – 2024)</div>
-      </div>
-      <div class="pdf-job">
-        <div class="pdf-job-title">Tecnólogo Profesional en Sistemas Informáticos</div>
-        <div class="pdf-job-company">Escuela Politécnica de Guadalajara — Egresada (2014 – 2018)</div>
-      </div>
-      
-      <div style="margin-top: 12px;">
-        <p style="font-weight: bold; margin-bottom: 5px; color: #0f172a;">Certificaciones Oficiales:</p>
-        <ul>
-          <li>Certified Specialist Networking Solution & UCM – Grandstream</li>
-          <li>CCNA Routing & Switching – Cisco</li>
-          <li>UML – Análisis y Diseño Orientado a Objetos</li>
-          <li>Gestión de Sistemas y Bases de Datos</li>
-          <li>Atención a Clientes</li>
-        </ul>
-      </div>
-    </div>
+        <div class="pdf-job-title">
+          Soporte Técnico — HP | 2020 – 2021
+        </div>
 
-    <div class="pdf-section">
-      <h2>Habilidades Técnicas y Blandas</h2>
+        <ul>
+
+          <li>
+            Atención presencial y remota a clientes corporativos
+            para diagnóstico de fallas y soporte de equipos
+            de cómputo HP.
+          </li>
+
+          <li>
+            Registro de tickets, validación técnica de casos
+            de garantía y generación de cotizaciones de
+            refacciones.
+          </li>
+
+          <li>
+            Diagnóstico y resolución de incidencias de hardware
+            y software.
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div class="pdf-job">
+
+        <div class="pdf-job-title">
+          Analista de Operaciones — HEMAC Teleinformática
+          | 2021 – 2023
+        </div>
+
+        <ul>
+
+          <li>
+            Coordinación logística y técnica en campo de
+            cuadrillas de trabajo para el despliegue del
+            proyecto estatal Jalisco 2.0 en más de 600 sitios.
+          </li>
+
+          <li>
+            Extracción y análisis de datos operativos y
+            elaboración de reportes interactivos en Power BI
+            para seguimiento de indicadores.
+          </li>
+
+          <li>
+            Supervisión de entregables técnicos de conectividad
+            e infraestructura.
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div class="pdf-job">
+
+        <div class="pdf-job-title">
+          Desarrollo y Soporte Técnico — Inttelec Networks
+          | 2024
+        </div>
+
+        <ul>
+
+          <li>
+            Diagnóstico y troubleshooting de hardware,
+            ruteadores y soluciones tecnológicas de
+            telecomunicación.
+          </li>
+
+          <li>
+            Elaboración de documentación técnica, guías de
+            usuario y manuales paso a paso.
+          </li>
+
+          <li>
+            Investigación técnica y pruebas de laboratorio
+            para evaluación y homologación de productos.
+          </li>
+
+        </ul>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PROYECTOS PDF
+         ===================================================== -->
+
+    <section class="pdf-section">
+
+      <h2>Proyectos Destacados</h2>
+
+
+      <div class="pdf-project">
+
+        <strong>Jalisco 2.0 — Infraestructura y conectividad</strong>
+
+        <p>
+          Participación en coordinación técnica y logística
+          para despliegue de infraestructura de conectividad
+          en más de 600 sitios.
+        </p>
+
+      </div>
+
+
+      <div class="pdf-project">
+
+        <strong>
+          Automatización y análisis — Excel, VBA y Power BI
+        </strong>
+
+        <p>
+          Desarrollo de herramientas para procesamiento,
+          filtrado, análisis y visualización de información
+          operativa.
+        </p>
+
+      </div>
+
+
+      <div class="pdf-project">
+
+        <strong>
+          Infraestructura TI — Redes, VoIP y servidores
+        </strong>
+
+        <p>
+          Administración y soporte de infraestructura de red,
+          telefonía IP, servidores y equipos de cómputo.
+        </p>
+
+      </div>
+
+
+      <div class="pdf-project">
+
+        <strong>
+          Soporte y documentación técnica
+        </strong>
+
+        <p>
+          Elaboración de manuales, guías técnicas y
+          procedimientos para resolución de incidencias.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         EDUCACIÓN PDF
+         ===================================================== -->
+
+    <section class="pdf-section">
+
+      <h2>Educación y Certificaciones</h2>
+
+
+      <div class="pdf-job">
+
+        <div class="pdf-job-title">
+          Licenciatura en Sistemas Computacionales
+        </div>
+
+        <div class="pdf-job-company">
+          UDGVirtual — Egresada | 2022 – 2024
+        </div>
+
+      </div>
+
+
+      <div class="pdf-job">
+
+        <div class="pdf-job-title">
+          Tecnólogo Profesional en Sistemas Informáticos
+        </div>
+
+        <div class="pdf-job-company">
+          Escuela Politécnica de Guadalajara —
+          Egresada | 2014 – 2018
+        </div>
+
+      </div>
+
+
+      <div>
+
+        <p>
+          <strong>Certificaciones:</strong>
+        </p>
+
+        <ul>
+
+          <li>
+            Certified Specialist Networking Solution & UCM —
+            Grandstream
+          </li>
+
+          <li>
+            CCNA Routing & Switching — Cisco
+          </li>
+
+          <li>
+            UML — Análisis y Diseño Orientado a Objetos
+          </li>
+
+          <li>
+            Gestión de Sistemas y Bases de Datos
+          </li>
+
+          <li>
+            Atención a Clientes
+          </li>
+
+        </ul>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         HABILIDADES PDF
+         ===================================================== -->
+
+    <section class="pdf-section">
+
+      <h2>Habilidades Técnicas</h2>
+
       <div class="pdf-skills-group">
-        <strong>Competencias Duras:</strong> Soporte Técnico Avanzado (Remoto y Presencial), Administración de Redes LAN/WAN, Telefonía IP VoIP, Diagnóstico Hardware/Software, Servidores Web (IIS y Tomcat), Análisis de Datos (Excel Avanzado, Reportes en Power BI), Gestión de Inventarios Informáticos.
+
+        <strong>Soporte:</strong>
+
+        Soporte técnico remoto y presencial,
+        diagnóstico de hardware y software,
+        troubleshooting y gestión de incidencias.
+
       </div>
+
+
       <div class="pdf-skills-group">
-        <strong>Competencias Blandas:</strong> Liderazgo y Coordinación de Equipos, Comunicación Efectiva y Asertiva, Resolución de Problemas bajo Presión, Pensamiento Lógico y Analítico, Organización y Gestión Eficiente del Tiempo, Empatía con el Usuario.
+
+        <strong>Redes:</strong>
+
+        Redes LAN/WAN, infraestructura de red,
+        routers, conectividad y telecomunicaciones.
+
       </div>
+
+
+      <div class="pdf-skills-group">
+
+        <strong>Telefonía:</strong>
+
+        Telefonía IP, VoIP y soluciones Grandstream.
+
+      </div>
+
+
+      <div class="pdf-skills-group">
+
+        <strong>Servidores:</strong>
+
+        Servidores web IIS y Tomcat.
+
+      </div>
+
+
+      <div class="pdf-skills-group">
+
+        <strong>Datos:</strong>
+
+        Excel avanzado, VBA, análisis de información
+        y Power BI.
+
+      </div>
+
+
+      <div class="pdf-skills-group">
+
+        <strong>Gestión:</strong>
+
+        Coordinación de equipos, documentación técnica,
+        inventarios, organización operativa y comunicación
+        con usuarios y proveedores.
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         COMPETENCIAS BLANDAS
+         ===================================================== -->
+
+    <section class="pdf-section">
+
+      <h2>Competencias</h2>
+
+      <p>
+
+        Liderazgo y coordinación de equipos ·
+        Comunicación efectiva y asertiva ·
+        Resolución de problemas ·
+        Pensamiento lógico y analítico ·
+        Organización y gestión del tiempo ·
+        Atención al usuario
+
+      </p>
+
+    </section>
+
+
+    <div class="pdf-footer">
+
+      Mayra Elizabeth Barbosa Salas ·
+      Ingeniera en Sistemas Computacionales
+
     </div>
+
+
   </div>
 
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+       ======================================================= -->
+
   <script>
-    // Contenido exacto, defendible en entrevista y optimizado para ATS
+
+
+    /* =======================================================
+       CONTENIDO
+       ======================================================= */
+
     const dataContent = {
-      'content-perfil': `<p style="color:#334155; text-align:justify;">Ingeniera en Sistemas Computacionales con más de 10 años de trayectoria en soporte técnico, administración de redes LAN/WAN y optimización de servicios de TI. Especializada en la gestión de infraestructura de cómputo, diagnóstico de fallas de hardware/software, administración de servidores Tomcat/IIS y análisis de métricas en Power BI. Experta en el troubleshooting metodológico de incidencias, documentación técnica estructurada y coordinación efectiva de equipos de soporte.</p>`,
-      
-      'content-experiencia': `
-        <div class="cv-item">
-          <div class="cv-item-header"><span>Jefa de Soporte Técnico — Universidad de Guadalajara</span><span>2018–2020</span></div>
-          <ul>
-            <li>Coordinación operativa de un equipo de 20 personas y control de inventario de infraestructura de cómputo.</li>
-            <li>Administración, soporte y monitoreo de redes de datos LAN/WAN, videovigilancia y servidores locales Tomcat/IIS.</li>
-            <li>Supervisión de telefonía IP bajo conmutadores Grandstream, desarrollo de páginas web internas y creación de manuales de documentación técnica.</li>
-          </ul>
-        </div>
-        <div class="cv-item">
-          <div class="cv-item-header"><span>Soporte Técnico — HP</span><span>2020–2021</span></div>
-          <ul>
-            <li>Atención presencial y remota a clientes corporativos para el diagnóstico de fallas y soporte de equipos de cómputo HP.</li>
-            <li>Registro detallado de tickets de servicio, validación técnica de casos de garantía y generación de cotizaciones de refacciones.</li>
-            <li>Resolución ágil de incidencias técnicas complejas enfocado en la fidelización y satisfacción del cliente.</li>
-          </ul>
-        </div>
-        <div class="cv-item">
-          <div class="cv-item-header"><span>Analista de Operaciones — HEMAC Teleinformática</span><span>2021–2023</span></div>
-          <ul>
-            <li>Coordinación logística y técnica en campo de cuadrillas de trabajo para el despliegue del proyecto estatal Jalisco 2.0 en más de 600 sitios activos.</li>
-            <li>Extracción de datos operativos y modelado de reportes interactivos en Power BI para el seguimiento de KPIs internos.</li>
-            <li>Supervisión de entregables técnicos de conectividad e infraestructura asegurando el cumplimiento de los objetivos del proyecto.</li>
-          </ul>
-        </div>
-        <div class="cv-item">
-          <div class="cv-item-header"><span>Desarrollo y Soporte Técnico — Inttelec Networks</span><span>2024</span></div>
-          <ul>
-            <li>Diagnóstico profundo y troubleshooting de hardware, ruteadores y soluciones tecnológicas de telecomunicación.</li>
-            <li>Elaboración formal de documentación de ingeniería, guías de usuario y manuales paso a paso para la base de conocimientos.</li>
-            <li>Investigación técnica y pruebas de laboratorio para la actualización constante y homologación de nuevos productos tecnológicos.</li>
-          </ul>
-        </div>`,
 
-      'content-educacion': `
-        <div class="cv-item">
-          <div class="cv-item-header"><span>Licenciatura en Sistemas Computacionales</span><span>UDGVirtual</span></div>
-          <p style="color:#64748b; font-size:12px; font-weight: 500;">Egresada (2022–2024)</p>
-        </div>
-        <div class="cv-item">
-          <div class="cv-item-header"><span>Tecnólogo Profesional en Sistemas Informáticos</span><span>Escuela Politécnica de Guadalajara</span></div>
-          <p style="color:#64748b; font-size:12px; font-weight: 500;">Egresada (2014–2018)</p>
-        </div>
-        <div style="margin-top:12px; border-top:1px solid #f1f5f9; padding-top:10px;">
-          <p style="font-weight:600; color:#0a3d62; margin-bottom:5px;">Certificaciones Oficiales:</p>
-          <ul>
-            <li>Certified Specialist Networking Solution & UCM – Grandstream</li>
-            <li>CCNA Routing & Switching – Cisco</li>
-            <li>UML – Análisis y Diseño Orientado a Objetos</li>
-            <li>Gestión de Sistemas y Bases de Datos</li>
-            <li>Atención a Clientes</li>
-          </ul>
-        </div>`,
 
-      'content-habilidades': `
+      "content-perfil": `
+
+        <p style="
+          color:#334155;
+          text-align:justify;
+          line-height:1.7;
+        ">
+
+          Ingeniera en Sistemas Computacionales con más de 10 años
+          de trayectoria en soporte técnico, administración de
+          redes LAN/WAN e infraestructura de TI. Experiencia en
+          diagnóstico de hardware y software, servidores Tomcat/IIS,
+          telefonía IP, análisis de información mediante Power BI
+          y Excel, así como coordinación de equipos de soporte.
+
+          <br><br>
+
+          Mi experiencia combina atención técnica, resolución de
+          incidencias, documentación, análisis de información,
+          operación de infraestructura y coordinación de personal.
+
+        </p>
+
+      `,
+
+
+      "content-experiencia": `
+
+        <div class="cv-item">
+
+          <div class="cv-item-header">
+
+            <span>
+              Jefa de Soporte Técnico —
+              Universidad de Guadalajara
+            </span>
+
+            <span class="cv-item-date">
+              2018–2020
+            </span>
+
+          </div>
+
+          <div class="cv-company">
+            Universidad de Guadalajara
+          </div>
+
+          <ul>
+
+            <li>
+              Coordinación operativa de un equipo de 20 personas
+              y control de inventario de infraestructura de cómputo.
+            </li>
+
+            <li>
+              Administración, soporte y monitoreo de redes de datos
+              LAN/WAN, videovigilancia y servidores locales
+              Tomcat/IIS.
+            </li>
+
+            <li>
+              Supervisión de telefonía IP mediante soluciones
+              Grandstream, desarrollo de páginas web internas y
+              creación de manuales de documentación técnica.
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <div class="cv-item">
+
+          <div class="cv-item-header">
+
+            <span>
+              Soporte Técnico — HP
+            </span>
+
+            <span class="cv-item-date">
+              2020–2021
+            </span>
+
+          </div>
+
+          <div class="cv-company">
+            HP
+          </div>
+
+          <ul>
+
+            <li>
+              Atención presencial y remota a clientes corporativos
+              para diagnóstico de fallas y soporte de equipos
+              de cómputo HP.
+            </li>
+
+            <li>
+              Registro de tickets, validación técnica de casos
+              de garantía y generación de cotizaciones de
+              refacciones.
+            </li>
+
+            <li>
+              Diagnóstico y resolución de incidencias de hardware
+              y software.
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <div class="cv-item">
+
+          <div class="cv-item-header">
+
+            <span>
+              Analista de Operaciones —
+              HEMAC Teleinformática
+            </span>
+
+            <span class="cv-item-date">
+              2021–2023
+            </span>
+
+          </div>
+
+          <div class="cv-company">
+            HEMAC Teleinformática
+          </div>
+
+          <ul>
+
+            <li>
+              Coordinación logística y técnica en campo de
+              cuadrillas de trabajo para el despliegue del
+              proyecto estatal Jalisco 2.0 en más de 600 sitios.
+            </li>
+
+            <li>
+              Extracción y análisis de datos operativos y
+              elaboración de reportes interactivos en Power BI
+              para seguimiento de indicadores.
+            </li>
+
+            <li>
+              Supervisión de entregables técnicos de conectividad
+              e infraestructura.
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <div class="cv-item">
+
+          <div class="cv-item-header">
+
+            <span>
+              Desarrollo y Soporte Técnico —
+              Inttelec Networks
+            </span>
+
+            <span class="cv-item-date">
+              2024
+            </span>
+
+          </div>
+
+          <div class="cv-company">
+            Inttelec Networks
+          </div>
+
+          <ul>
+
+            <li>
+              Diagnóstico y troubleshooting de hardware,
+              ruteadores y soluciones tecnológicas de
+              telecomunicación.
+            </li>
+
+            <li>
+              Elaboración de documentación de ingeniería,
+              guías de usuario y manuales paso a paso.
+            </li>
+
+            <li>
+              Investigación técnica y pruebas de laboratorio
+              para evaluación y homologación de productos.
+            </li>
+
+          </ul>
+
+        </div>
+
+      `,
+
+
+      "content-proyectos": `
+
+        <div class="project-grid">
+
+
+          <article class="project-card">
+
+            <div class="project-number">
+              PROJECT_01
+            </div>
+
+            <h3>
+              Jalisco 2.0
+            </h3>
+
+            <span class="project-tech">
+              INFRAESTRUCTURA · REDES · OPERACIONES
+            </span>
+
+            <p>
+              Participación en la coordinación técnica y logística
+              del despliegue de infraestructura de conectividad
+              en más de 600 sitios.
+            </p>
+
+          </article>
+
+
+          <article class="project-card">
+
+            <div class="project-number">
+              PROJECT_02
+            </div>
+
+            <h3>
+              Automatización y análisis
+            </h3>
+
+            <span class="project-tech">
+              EXCEL · VBA · POWER BI
+            </span>
+
+            <p>
+              Desarrollo de herramientas para procesamiento,
+              filtrado, análisis y visualización de información
+              operativa.
+            </p>
+
+          </article>
+
+
+          <article class="project-card">
+
+            <div class="project-number">
+              PROJECT_03
+            </div>
+
+            <h3>
+              Infraestructura TI
+            </h3>
+
+            <span class="project-tech">
+              REDES · VoIP · SERVIDORES
+            </span>
+
+            <p>
+              Administración y soporte de infraestructura de red,
+              telefonía IP, servidores y equipos de cómputo.
+            </p>
+
+          </article>
+
+
+          <article class="project-card">
+
+            <div class="project-number">
+              PROJECT_04
+            </div>
+
+            <h3>
+              Soporte y documentación
+            </h3>
+
+            <span class="project-tech">
+              TROUBLESHOOTING · DOCUMENTACIÓN
+            </span>
+
+            <p>
+              Elaboración de manuales, guías técnicas y
+              procedimientos para resolución de incidencias.
+            </p>
+
+          </article>
+
+
+        </div>
+
+      `,
+
+
+      "content-educacion": `
+
+        <div class="cv-item">
+
+          <div class="cv-item-header">
+
+            <span>
+              Licenciatura en Sistemas Computacionales
+            </span>
+
+            <span class="cv-item-date">
+              2022–2024
+            </span>
+
+          </div>
+
+          <div class="cv-company">
+            UDGVirtual — Egresada
+          </div>
+
+        </div>
+
+
+        <div class="cv-item">
+
+          <div class="cv-item-header">
+
+            <span>
+              Tecnólogo Profesional en Sistemas Informáticos
+            </span>
+
+            <span class="cv-item-date">
+              2014–2018
+            </span>
+
+          </div>
+
+          <div class="cv-company">
+            Escuela Politécnica de Guadalajara — Egresada
+          </div>
+
+        </div>
+
+
+        <div class="certifications">
+
+          <div class="certifications-title">
+            Certificaciones
+          </div>
+
+          <ul>
+
+            <li>
+              Certified Specialist Networking Solution & UCM —
+              Grandstream
+            </li>
+
+            <li>
+              CCNA Routing & Switching — Cisco
+            </li>
+
+            <li>
+              UML — Análisis y Diseño Orientado a Objetos
+            </li>
+
+            <li>
+              Gestión de Sistemas y Bases de Datos
+            </li>
+
+            <li>
+              Atención a Clientes
+            </li>
+
+          </ul>
+
+        </div>
+
+      `,
+
+
+      "content-habilidades": `
+
         <div class="cv-lists">
-          <div>
-            <strong style="color:#0a3d62;">Competencias Duras</strong>
-            <ul style="margin-top:5px;">
-              <li>Soporte Técnico (Remoto/Presencial)</li>
-              <li>Administración de Redes LAN/WAN</li>
-              <li>Telefonía IP VoIP & Grandstream</li>
-              <li>Servidores Web (IIS / Tomcat)</li>
-              <li>Análisis de Datos (Power BI / Excel)</li>
-              <li>Diagnóstico Hardware/Software</li>
+
+
+          <div class="skill-column">
+
+            <div class="skill-title">
+              COMPETENCIAS TÉCNICAS
+            </div>
+
+            <ul>
+
+              <li>
+                Soporte Técnico Remoto y Presencial
+              </li>
+
+              <li>
+                Redes LAN/WAN
+              </li>
+
+              <li>
+                Telefonía IP / VoIP
+              </li>
+
+              <li>
+                Grandstream
+              </li>
+
+              <li>
+                Diagnóstico Hardware/Software
+              </li>
+
+              <li>
+                Servidores IIS / Tomcat
+              </li>
+
+              <li>
+                Power BI
+              </li>
+
+              <li>
+                Excel / VBA
+              </li>
+
+              <li>
+                Gestión de Inventarios TI
+              </li>
+
             </ul>
+
           </div>
-          <div>
-            <strong style="color:#0a3d62;">Competencias Blandas</strong>
-            <ul style="margin-top:5px;">
-              <li>Liderazgo y Coordinación</li>
-              <li>Comunicación Efectiva y Asertiva</li>
-              <li>Resolución de Problemas bajo Presión</li>
-              <li>Pensamiento Lógico y Analítico</li>
-              <li>Organización del Tiempo</li>
+
+
+          <div class="skill-column">
+
+            <div class="skill-title">
+              COMPETENCIAS PROFESIONALES
+            </div>
+
+            <ul>
+
+              <li>
+                Liderazgo y Coordinación
+              </li>
+
+              <li>
+                Comunicación Efectiva
+              </li>
+
+              <li>
+                Resolución de Problemas
+              </li>
+
+              <li>
+                Pensamiento Lógico y Analítico
+              </li>
+
+              <li>
+                Organización
+              </li>
+
+              <li>
+                Gestión del Tiempo
+              </li>
+
+              <li>
+                Atención al Usuario
+              </li>
+
+              <li>
+                Documentación Técnica
+              </li>
+
             </ul>
+
           </div>
-        </div>`
+
+
+        </div>
+
+      `
+
     };
 
-    const introCode = `/**
- * INITIALIZING CORE SYSTEM...
- * -> Loading Mayra_Barbosa_CV_OS_v4.0
- * -> Aligning Real Technical Background... [OK]
- * -> Status: Connected & 100% Interview Ready
- * Despliegue listo. Interfaz de usuario montada.
- * [SISTEMA]: Por favor, ejecute los módulos en la derecha.
- */\n`;
 
-    const codeArea = document.getElementById('code-area');
-    const viewArea = document.getElementById('view-area');
-    let index = 0;
+    /* =======================================================
+       TERMINAL
+       ======================================================= */
 
-    function typeIntro() {
-      if (index < introCode.length) {
-        codeArea.innerHTML += introCode.charAt(index);
-        index++;
-        codeArea.scrollTop = codeArea.scrollHeight;
-        setTimeout(typeIntro, 10);
+    const terminalBody =
+      document.getElementById("terminal-body");
+
+    const viewArea =
+      document.getElementById("view-area");
+
+
+    const introLines = [
+
+      "MAYRA_BARBOSA@SYSTEMS:~$ ./cv",
+
+      "",
+
+      "Initializing professional_profile...",
+
+      "Loading technical_background...        OK",
+
+      "Loading infrastructure_experience...  OK",
+
+      "Loading support_experience...         OK",
+
+      "Loading projects...                   OK",
+
+      "Loading education...                  OK",
+
+      "",
+
+      "SYSTEM STATUS: ONLINE",
+
+      "PROFILE STATUS: AVAILABLE",
+
+      "",
+
+      ">> Seleccione un módulo del CV.",
+
+      ">> Los módulos contienen información profesional.",
+
+      ""
+
+    ];
+
+
+    let lineIndex = 0;
+
+
+    function typeTerminal() {
+
+      if (lineIndex < introLines.length) {
+
+        const line =
+          introLines[lineIndex];
+
+        const div =
+          document.createElement("div");
+
+        if (
+          line.includes("OK") ||
+          line.includes("ONLINE")
+        ) {
+
+          div.className =
+            "terminal-success";
+
+        } else if (
+          line.includes("$")
+        ) {
+
+          div.className =
+            "terminal-prompt";
+
+        } else {
+
+          div.className =
+            "terminal-info";
+
+        }
+
+        div.textContent = line;
+
+        terminalBody.appendChild(div);
+
+        terminalBody.parentElement.scrollTop =
+          terminalBody.parentElement.scrollHeight;
+
+        lineIndex++;
+
+        setTimeout(typeTerminal, 45);
+
       } else {
+
+        const cursor =
+          document.createElement("span");
+
+        cursor.className =
+          "cursor";
+
+        terminalBody.appendChild(cursor);
+
         viewArea.style.opacity = "1";
-        viewArea.style.transform = "translateY(0)";
+
+        viewArea.style.transform =
+          "translateY(0)";
+
       }
+
     }
+
+
+    /* =======================================================
+       ABRIR SECCIÓN
+       ======================================================= */
 
     function revealSection(sectionId) {
-      const sectionNode = document.getElementById(sectionId);
-      const contentNode = sectionNode.querySelector('.cv-content');
-      if (sectionNode.classList.contains('active')) return;
 
-      codeArea.innerHTML += `\n$ run system.modules.load('${sectionId.toUpperCase()}')\n>> Cargando recursos reales verificados... [OK]`;
-      codeArea.scrollTop = codeArea.scrollHeight;
+      const sectionNode =
+        document.getElementById(sectionId);
 
-      sectionNode.classList.add('active');
-      contentNode.innerHTML = dataContent[contentNode.id];
+      const contentNode =
+        sectionNode.querySelector(".cv-content");
+
+      if (
+        sectionNode.classList.contains("active")
+      ) {
+
+        return;
+
+      }
+
+
+      const moduleName =
+        sectionId
+          .replace("sec-", "")
+          .toUpperCase();
+
+
+      addTerminalCommand(
+        `run system.modules.load('${moduleName}')`
+      );
+
+
+      contentNode.innerHTML =
+        dataContent[contentNode.id];
+
+
+      sectionNode.classList.add("active");
+
+
+      setTimeout(() => {
+
+        sectionNode.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest"
+        });
+
+      }, 100);
+
     }
 
-    window.onload = typeIntro;
+
+    /* =======================================================
+       TERMINAL COMMAND
+       ======================================================= */
+
+    function addTerminalCommand(command) {
+
+      const oldCursor =
+        terminalBody.querySelector(".cursor");
+
+      if (oldCursor) {
+        oldCursor.remove();
+      }
+
+
+      const commandLine =
+        document.createElement("div");
+
+      commandLine.className =
+        "terminal-prompt";
+
+      commandLine.textContent =
+        `\n$ ${command}`;
+
+      terminalBody.appendChild(
+        commandLine
+      );
+
+
+      const result =
+        document.createElement("div");
+
+      result.className =
+        "terminal-success";
+
+      result.textContent =
+        ">> MODULE LOADED [OK]";
+
+      terminalBody.appendChild(
+        result
+      );
+
+
+      const cursor =
+        document.createElement("span");
+
+      cursor.className =
+        "cursor";
+
+      terminalBody.appendChild(cursor);
+
+
+      terminalBody.parentElement.scrollTop =
+        terminalBody.parentElement.scrollHeight;
+
+    }
+
+
+    /* =======================================================
+       SCROLL
+       ======================================================= */
+
+    function scrollToSection(sectionId) {
+
+      const section =
+        document.getElementById(sectionId);
+
+      if (!section) {
+        return;
+      }
+
+
+      revealSection(sectionId);
+
+
+      setTimeout(() => {
+
+        section.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }, 200);
+
+    }
+
+
+    /* =======================================================
+       WHATSAPP
+       ======================================================= */
+
+    function openWhatsApp() {
+
+      const phone =
+        "523326392729";
+
+      const message =
+        encodeURIComponent(
+          "Hola Mayra, vi tu CV interactivo y me gustaría contactarte."
+        );
+
+
+      window.open(
+        `https://wa.me/${phone}?text=${message}`,
+        "_blank",
+        "noopener,noreferrer"
+      );
+
+    }
+
+
+    /* =======================================================
+       INICIO
+       ======================================================= */
+
+    window.addEventListener(
+      "load",
+      typeTerminal
+    );
+
+
   </script>
+
 </body>
 </html>

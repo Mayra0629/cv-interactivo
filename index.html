@@ -10,11 +10,9 @@
 content="Mayra Elizabeth Barbosa Salas — Ingeniera en Sistemas Computacionales, especialista en soporte técnico, redes, telecomunicaciones, infraestructura y datos.">
 
 <style>
-
 /* =========================================================
-   RESET
+   RESET & BASE
 ========================================================= */
-
 *{
     margin:0;
     padding:0;
@@ -32,8 +30,7 @@ body{
     overflow-x:hidden;
 }
 
-button,
-a{
+button, a{
     font-family:inherit;
 }
 
@@ -42,27 +39,19 @@ a{
     text-decoration:none;
 }
 
-
 /* =========================================================
    BOOT TERMINAL
 ========================================================= */
-
 #boot{
     position:fixed;
     inset:0;
     z-index:99999;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     background:#000;
-
     padding:20px;
-
-    transition:
-        opacity .65s ease,
-        visibility .65s ease;
+    transition: opacity .4s ease, visibility .4s ease;
 }
 
 #boot.hidden{
@@ -74,19 +63,11 @@ a{
 .terminal-window{
     width:min(920px,100%);
     height:min(620px,88vh);
-
     background:#020204;
-
     border:1px solid #24242d;
-
     border-radius:12px;
-
-    box-shadow:
-        0 0 80px rgba(125,55,255,.12),
-        inset 0 0 50px rgba(255,255,255,.015);
-
+    box-shadow: 0 0 80px rgba(125,55,255,.12), inset 0 0 50px rgba(255,255,255,.015);
     overflow:hidden;
-
     display:flex;
     flex-direction:column;
 }
@@ -94,110 +75,74 @@ a{
 .terminal-top{
     height:42px;
     flex-shrink:0;
-
     display:flex;
     align-items:center;
-
+    justify-content:space-between;
     padding:0 15px;
-
     border-bottom:1px solid #1b1b22;
-
     background:#09090d;
+}
+
+.terminal-top-left{
+    display:flex;
+    align-items:center;
 }
 
 .terminal-dot{
     width:11px;
     height:11px;
     border-radius:50%;
-
     margin-right:7px;
-
     background:#30303a;
 }
 
 .terminal-title{
-    margin-left:12px;
-
+    margin-left:8px;
     color:#666673;
-
     font-size:12px;
     letter-spacing:1px;
 }
 
+.skip-btn{
+    background:transparent;
+    border:1px solid #333342;
+    color:#9b5cff;
+    padding:3px 8px;
+    border-radius:4px;
+    font-size:11px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.skip-btn:hover{
+    border-color:#9b5cff;
+    color:#fff;
+}
+
 #terminal{
     flex:1;
-
     padding:24px;
-
-    overflow:hidden;
-
-    font-family:
-        "SFMono-Regular",
-        Consolas,
-        "Liberation Mono",
-        monospace;
-
+    overflow-y:auto;
+    font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
     font-size:14px;
     line-height:1.8;
-
     white-space:pre-wrap;
-
     color:#a7a7b3;
 }
 
-.terminal-line{
-    min-height:1.8em;
-}
-
-.terminal-line.prompt{
-    color:#ffffff;
-}
-
-.terminal-line.info{
-    color:#8f8f9b;
-}
-
-.terminal-line.success{
-    color:#8df7cf;
-    text-shadow:0 0 10px rgba(90,255,190,.15);
-}
-
-@media(max-width:600px){
-
-    #boot{
-        padding:10px;
-    }
-
-    .terminal-window{
-        height:90vh;
-        border-radius:9px;
-    }
-
-    .terminal-top{
-        height:38px;
-    }
-
-    #terminal{
-        padding:17px;
-        font-size:12px;
-        line-height:1.75;
-    }
-}
-
+.terminal-line{ min-height:1.8em; }
+.terminal-line.prompt{ color:#ffffff; }
+.terminal-line.info{ color:#8f8f9b; }
+.terminal-line.success{ color:#8df7cf; text-shadow:0 0 10px rgba(90,255,190,.15); }
 
 /* =========================================================
-   PORTFOLIO
+   PORTFOLIO LAYOUT
 ========================================================= */
-
 #portfolio{
     opacity:0;
     visibility:hidden;
-    transform:translateY(35px);
-
-    transition:
-        opacity .8s ease,
-        transform .8s ease,
-        visibility .8s ease;
+    transform:translateY(20px);
+    transition: opacity .5s ease, transform .5s ease, visibility .5s ease;
 }
 
 #portfolio.ready{
@@ -206,1203 +151,487 @@ a{
     transform:translateY(0);
 }
 
-
-/* =========================================================
-   BACKGROUND
-========================================================= */
-
 #portfolio::before{
     content:"";
-
     position:fixed;
     inset:0;
-
     z-index:-3;
-
     background:
-        radial-gradient(
-            circle at 15% 10%,
-            rgba(109,40,217,.20),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 85% 20%,
-            rgba(34,211,238,.12),
-            transparent 25%
-        ),
-        radial-gradient(
-            circle at 50% 100%,
-            rgba(236,72,153,.08),
-            transparent 30%
-        );
-
+        radial-gradient(circle at 15% 10%, rgba(109,40,217,.20), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(34,211,238,.12), transparent 25%),
+        radial-gradient(circle at 50% 100%, rgba(236,72,153,.08), transparent 30%);
     pointer-events:none;
 }
-
-#portfolio::after{
-    content:"";
-
-    position:fixed;
-    inset:0;
-
-    z-index:-2;
-
-    opacity:.22;
-
-    background-image:
-        linear-gradient(
-            rgba(255,255,255,.025) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.025) 1px,
-            transparent 1px
-        );
-
-    background-size:40px 40px;
-
-    mask-image:linear-gradient(
-        to bottom,
-        black,
-        transparent 90%
-    );
-
-    pointer-events:none;
-}
-
-
-/* =========================================================
-   NAV
-========================================================= */
 
 nav{
     position:sticky;
     top:0;
-
     z-index:1000;
-
     backdrop-filter:blur(18px);
-
     background:rgba(5,5,10,.72);
-
     border-bottom:1px solid rgba(255,255,255,.07);
 }
 
 .nav-inner{
     width:min(1180px,92%);
     margin:auto;
-
     min-height:68px;
-
     display:flex;
     align-items:center;
     justify-content:space-between;
-
     gap:20px;
 }
 
-.logo{
-    font-weight:800;
-    letter-spacing:-.5px;
-}
-
-.logo span{
-    color:#9b5cff;
-}
+.logo{ font-weight:800; letter-spacing:-.5px; }
+.logo span{ color:#9b5cff; }
 
 .nav-links{
     display:flex;
     align-items:center;
     gap:22px;
-
     color:#a1a1aa;
-
     font-size:13px;
 }
 
-.nav-links a{
-    transition:.25s;
-}
-
-.nav-links a:hover{
-    color:#fff;
-}
+.nav-links a:hover{ color:#fff; }
 
 .nav-button{
     border:1px solid rgba(155,92,255,.5);
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(109,40,217,.25),
-            rgba(34,211,238,.08)
-        );
-
+    background: linear-gradient(135deg, rgba(109,40,217,.25), rgba(34,211,238,.08));
     color:#fff;
-
-    padding:10px 15px;
-
+    padding:8px 14px;
     border-radius:8px;
-
     cursor:pointer;
-
     transition:.25s;
+    font-size:12px;
 }
 
 .nav-button:hover{
     border-color:#9b5cff;
-
-    box-shadow:
-        0 0 20px rgba(155,92,255,.25);
+    box-shadow: 0 0 20px rgba(155,92,255,.25);
 }
 
-@media(max-width:760px){
-
-    .nav-inner{
-        min-height:60px;
-    }
-
-    .nav-links{
-        display:none;
-    }
-}
-
-
-/* =========================================================
-   GLOBAL
-========================================================= */
-
-.container{
-    width:min(1180px,92%);
-    margin:auto;
-}
-
-section{
-    padding:90px 0;
-}
+.container{ width:min(1180px,92%); margin:auto; }
+section{ padding:90px 0; }
 
 .section-label{
     color:#9b5cff;
-
     font-size:12px;
     font-weight:800;
-
     letter-spacing:3px;
-
     text-transform:uppercase;
-
     margin-bottom:14px;
 }
 
 .section-title{
     font-size:clamp(30px,5vw,48px);
-
     line-height:1.05;
-
     letter-spacing:-1.8px;
-
     margin-bottom:18px;
 }
 
 .section-description{
     max-width:720px;
-
     color:#92929d;
-
     line-height:1.8;
-
     font-size:16px;
 }
 
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero{
-    min-height:calc(100vh - 68px);
-
-    display:flex;
-    align-items:center;
-
-    padding:90px 0 70px;
-
-    position:relative;
-}
-
-.hero-grid{
-    display:grid;
-
-    grid-template-columns:
-        minmax(0,1.25fr)
-        minmax(300px,.75fr);
-
-    gap:70px;
-
-    align-items:center;
-}
+/* HERO */
+.hero{ min-height:calc(100vh - 68px); display:flex; align-items:center; padding:70px 0; }
+.hero-grid{ display:grid; grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr); gap:60px; align-items:center; }
 
 .status{
     display:inline-flex;
     align-items:center;
     gap:8px;
-
     padding:8px 12px;
-
     border:1px solid rgba(34,211,238,.22);
-
     background:rgba(34,211,238,.04);
-
     color:#8beaf5;
-
     border-radius:100px;
-
     font-size:11px;
-
     letter-spacing:1.4px;
-
     margin-bottom:24px;
 }
 
-.status-dot{
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:#22d3ee;
-
-    box-shadow:
-        0 0 12px #22d3ee;
-}
+.status-dot{ width:7px; height:7px; border-radius:50%; background:#22d3ee; box-shadow:0 0 12px #22d3ee; }
 
 .hero h1{
-    font-size:
-        clamp(
-            50px,
-            9vw,
-            105px
-        );
-
-    line-height:.9;
-
-    letter-spacing:-6px;
-
+    font-size:clamp(45px, 8vw, 95px);
+    line-height:.95;
+    letter-spacing:-4px;
     margin-bottom:25px;
-
     font-weight:900;
 }
 
 .gradient-text{
-    background:
-        linear-gradient(
-            100deg,
-            #ffffff 5%,
-            #b68cff 40%,
-            #22d3ee 80%
-        );
-
+    background:linear-gradient(100deg, #ffffff 5%, #b68cff 40%, #22d3ee 80%);
     -webkit-background-clip:text;
     background-clip:text;
-
     color:transparent;
 }
 
-.hero-role{
-    font-size:
-        clamp(
-            20px,
-            3vw,
-            31px
-        );
-
-    line-height:1.25;
-
-    color:#dddde5;
-
-    margin-bottom:22px;
-}
-
-.hero-description{
-    max-width:700px;
-
-    color:#9797a4;
-
-    line-height:1.8;
-
-    font-size:16px;
-}
-
-.hero-actions{
-    display:flex;
-    flex-wrap:wrap;
-
-    gap:12px;
-
-    margin-top:32px;
-}
+.hero-role{ font-size:clamp(18px, 2.5vw, 28px); line-height:1.3; color:#dddde5; margin-bottom:20px; }
+.hero-description{ max-width:700px; color:#9797a4; line-height:1.8; font-size:16px; }
+.hero-actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:32px; }
 
 .btn{
     display:inline-flex;
-
     align-items:center;
     justify-content:center;
-
     gap:8px;
-
     min-height:46px;
-
-    padding:0 19px;
-
+    padding:0 20px;
     border-radius:9px;
-
     border:1px solid rgba(255,255,255,.12);
-
     background:#111118;
-
     color:#fff;
-
     cursor:pointer;
-
-    transition:
-        transform .2s,
-        border .2s,
-        box-shadow .2s;
+    font-size:14px;
+    transition: transform .2s, border .2s, box-shadow .2s;
 }
 
 .btn:hover{
     transform:translateY(-2px);
-
     border-color:rgba(155,92,255,.7);
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
 }
 
 .btn-primary{
     border-color:#8b5cf6;
-
-    background:
-        linear-gradient(
-            135deg,
-            #6d28d9,
-            #9b5cff
-        );
-
-    box-shadow:
-        0 0 25px rgba(139,92,246,.20);
+    background: linear-gradient(135deg, #6d28d9, #9b5cff);
+    box-shadow: 0 0 25px rgba(139,92,246,.20);
 }
 
-.btn-secondary{
-    background:rgba(255,255,255,.025);
-}
+.btn-secondary{ background:rgba(255,255,255,.03); }
 
-
-/* =========================================================
-   HERO CARD
-========================================================= */
-
+/* TERMINAL CARD */
 .hero-panel{
-    position:relative;
-
     border:1px solid rgba(155,92,255,.22);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.055),
-            rgba(255,255,255,.015)
-        );
-
+    background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015));
     border-radius:18px;
-
     padding:25px;
-
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.35),
-        inset 0 1px rgba(255,255,255,.04);
+    box-shadow: 0 30px 100px rgba(0,0,0,.35);
 }
 
-.panel-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.panel-top{ display:flex; justify-content:space-between; margin-bottom:20px; color:#777783; font-family:monospace; font-size:11px; }
+.panel-status{ color:#70e8bb; }
+.panel-code{ font-family:"SFMono-Regular",Consolas,monospace; font-size:12px; line-height:1.9; color:#92929e; }
+.panel-code .purple{ color:#b28aff; }
+.panel-code .cyan{ color:#5de5f3; }
+.panel-code .green{ color:#76e7ba; }
+.panel-code .white{ color:#fff; }
+.panel-line{ height:1px; background:rgba(255,255,255,.06); margin:18px 0; }
+.panel-footer{ display:flex; justify-content:space-between; color:#666672; font-size:11px; }
 
-    margin-bottom:24px;
+/* STATS */
+.stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:60px; }
+.stat{ padding:22px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.025); border-radius:13px; }
+.stat-number{ font-size:32px; font-weight:900; color:#fff; }
+.stat-label{ margin-top:6px; color:#777783; font-size:11px; letter-spacing:1px; line-height:1.4; }
 
-    color:#777783;
-
-    font-family:monospace;
-
-    font-size:11px;
-}
-
-.panel-status{
-    color:#70e8bb;
-}
-
-.panel-code{
-    font-family:
-        "SFMono-Regular",
-        Consolas,
-        monospace;
-
-    font-size:12px;
-
-    line-height:2;
-
-    color:#92929e;
-}
-
-.panel-code .purple{
-    color:#b28aff;
-}
-
-.panel-code .cyan{
-    color:#5de5f3;
-}
-
-.panel-code .green{
-    color:#76e7ba;
-}
-
-.panel-code .white{
-    color:#fff;
-}
-
-.panel-line{
-    height:1px;
-
-    background:rgba(255,255,255,.06);
-
-    margin:18px 0;
-}
-
-.panel-footer{
-    display:flex;
-    justify-content:space-between;
-
-    color:#666672;
-
-    font-size:11px;
-}
-
-
-/* =========================================================
-   STATS
-========================================================= */
-
-.stats{
-    display:grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:12px;
-
-    margin-top:70px;
-}
-
-.stat{
-    padding:24px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.08);
-
-    background:
-        rgba(255,255,255,.025);
-
-    border-radius:13px;
-}
-
-.stat-number{
-    font-size:32px;
-
-    font-weight:900;
-
-    color:#fff;
-}
-
-.stat-label{
-    margin-top:7px;
-
-    color:#777783;
-
-    font-size:11px;
-
-    letter-spacing:1px;
-
-    line-height:1.5;
-}
-
-@media(max-width:850px){
-
-    .hero-grid{
-        grid-template-columns:1fr;
-    }
-
-    .hero{
-        padding-top:70px;
-    }
-
-    .hero h1{
-        letter-spacing:-3px;
-    }
-
-    .stats{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-}
-
-@media(max-width:500px){
-
-    .stats{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .stat{
-        padding:18px;
-    }
-
-    .stat-number{
-        font-size:26px;
-    }
-}
-
-
-/* =========================================================
-   CARDS
-========================================================= */
-
-.card-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:18px;
-
-    margin-top:40px;
-}
-
-.card{
-    padding:30px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.08);
-
+/* CARDS & GRIDS */
+.card-grid, .projects, .education-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:40px; }
+.card, .project, .education-card{
+    padding:28px;
+    border:1px solid rgba(255,255,255,.08);
     border-radius:16px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.045),
-            rgba(255,255,255,.015)
-        );
-
-    transition:
-        transform .25s,
-        border .25s,
-        box-shadow .25s;
+    background: linear-gradient(145deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+    transition: transform .25s, border .25s;
 }
+.card:hover, .project:hover{ transform:translateY(-3px); border-color:rgba(155,92,255,.35); }
+.card h3, .project h3, .education-card h3{ font-size:20px; margin-bottom:10px; color:#fff; }
+.card p, .project p, .education-card p{ color:#8d8d99; line-height:1.7; font-size:14px; }
 
-.card:hover{
-    transform:translateY(-4px);
-
-    border-color:
-        rgba(155,92,255,.35);
-
-    box-shadow:
-        0 25px 70px
-        rgba(0,0,0,.28);
-}
-
-.card h3{
-    font-size:21px;
-
-    margin-bottom:10px;
-}
-
-.card p{
-    color:#8d8d99;
-
-    line-height:1.7;
-}
-
-@media(max-width:720px){
-
-    .card-grid{
-        grid-template-columns:1fr;
-    }
-}
-
-
-/* =========================================================
-   EXPERIENCE
-========================================================= */
-
-.timeline{
-    position:relative;
-
-    margin-top:50px;
-
-    padding-left:30px;
-}
-
+/* TIMELINE */
+.timeline{ position:relative; margin-top:50px; padding-left:25px; }
 .timeline::before{
     content:"";
-
     position:absolute;
-
-    left:6px;
+    left:5px;
     top:0;
     bottom:0;
-
-    width:1px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            #9b5cff,
-            rgba(155,92,255,.05)
-        );
+    width:2px;
+    background:linear-gradient(to bottom, #9b5cff, rgba(155,92,255,.05));
 }
-
-.timeline-item{
-    position:relative;
-
-    padding:0 0 45px 30px;
-}
-
+.timeline-item{ position:relative; padding:0 0 45px 25px; }
 .timeline-item::before{
     content:"";
-
     position:absolute;
-
-    left:-30px;
-    top:4px;
-
-    width:11px;
-    height:11px;
-
+    left:-25px;
+    top:5px;
+    width:10px;
+    height:10px;
     border-radius:50%;
-
     background:#9b5cff;
-
-    box-shadow:
-        0 0 18px rgba(155,92,255,.8);
+    box-shadow:0 0 12px rgba(155,92,255,.8);
 }
+.timeline-date{ color:#22d3ee; font-family:monospace; font-size:12px; margin-bottom:6px; }
+.timeline-title{ font-size:20px; margin-bottom:4px; }
+.timeline-company{ color:#9b5cff; margin-bottom:12px; font-weight:700; font-size:14px; }
+.timeline-item ul{ list-style:none; display:grid; gap:7px; }
+.timeline-item li{ color:#8e8e9a; line-height:1.6; font-size:14px; }
+.timeline-item li::before{ content:"→ "; color:#22d3ee; }
 
-.timeline-date{
-    color:#22d3ee;
-
-    font-family:monospace;
-
-    font-size:12px;
-
-    margin-bottom:9px;
-}
-
-.timeline-title{
-    font-size:23px;
-
-    margin-bottom:4px;
-}
-
-.timeline-company{
-    color:#9b5cff;
-
-    margin-bottom:14px;
-
-    font-weight:700;
-}
-
-.timeline-item ul{
-    list-style:none;
-
-    display:grid;
-
-    gap:7px;
-}
-
-.timeline-item li{
-    color:#8e8e9a;
-
-    line-height:1.6;
-}
-
-.timeline-item li::before{
-    content:"→";
-
-    color:#22d3ee;
-
-    margin-right:8px;
-}
-
-
-/* =========================================================
-   SKILLS
-========================================================= */
-
-.skill-wrapper{
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:9px;
-
-    margin-top:32px;
-}
-
+/* SKILLS */
+.skill-wrapper{ display:flex; flex-wrap:wrap; gap:9px; margin-top:32px; }
 .skill{
-    padding:10px 13px;
-
+    padding:9px 13px;
     border:1px solid rgba(255,255,255,.09);
-
     border-radius:8px;
-
     background:rgba(255,255,255,.025);
-
     color:#b4b4bf;
-
     font-size:13px;
-
-    transition:.2s;
 }
+.skill:hover{ color:#fff; border-color:rgba(34,211,238,.35); background:rgba(34,211,238,.04); }
 
-.skill:hover{
-    color:#fff;
+.project-tags{ display:flex; flex-wrap:wrap; gap:7px; margin-top:18px; }
+.project-tag{ color:#8f82bd; font-size:11px; letter-spacing:.8px; font-family:monospace; }
+.project-number{ font-family:monospace; color:#6f6f7a; font-size:11px; margin-bottom:30px; }
 
-    border-color:
-        rgba(34,211,238,.35);
-
-    background:
-        rgba(34,211,238,.04);
-}
-
-
-/* =========================================================
-   PROJECTS
-========================================================= */
-
-.projects{
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:18px;
-
-    margin-top:45px;
-}
-
-.project{
-    position:relative;
-
-    overflow:hidden;
-
-    min-height:230px;
-
-    padding:28px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.08);
-
-    border-radius:16px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(109,40,217,.10),
-            rgba(255,255,255,.018)
-        );
-}
-
-.project-number{
-    font-family:monospace;
-
-    color:#6f6f7a;
-
-    font-size:11px;
-
-    margin-bottom:45px;
-}
-
-.project h3{
-    font-size:24px;
-
-    margin-bottom:12px;
-}
-
-.project p{
-    color:#8e8e9a;
-
-    line-height:1.7;
-}
-
-.project-tags{
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:7px;
-
-    margin-top:20px;
-}
-
-.project-tag{
-    color:#8f82bd;
-
-    font-size:10px;
-
-    letter-spacing:.8px;
-}
-
-@media(max-width:720px){
-
-    .projects{
-        grid-template-columns:1fr;
-    }
-}
-
-
-/* =========================================================
-   EDUCATION
-========================================================= */
-
-.education-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:18px;
-
-    margin-top:40px;
-}
-
-.education-card{
-    padding:28px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.08);
-
-    border-radius:15px;
-
-    background:
-        rgba(255,255,255,.025);
-}
-
-.education-year{
-    color:#22d3ee;
-
-    font-family:monospace;
-
-    font-size:12px;
-
-    margin-bottom:12px;
-}
-
-.education-card h3{
-    margin-bottom:7px;
-}
-
-.education-card p{
-    color:#858591;
-
-    line-height:1.6;
-}
-
-.cert-list{
-    margin-top:25px;
-
-    display:grid;
-
-    gap:10px;
-}
-
+/* CERTIFICATIONS */
+.cert-list{ margin-top:25px; display:grid; gap:10px; }
 .cert{
     padding:14px 16px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.07);
-
-    background:
-        rgba(255,255,255,.02);
-
+    border:1px solid rgba(255,255,255,.07);
+    background:rgba(255,255,255,.02);
     border-radius:9px;
-
     color:#aaaab5;
+    font-size:14px;
 }
+.cert::before{ content:"✓ "; color:#75e5b9; margin-right:8px; }
 
-.cert::before{
-    content:"✓";
-
-    color:#75e5b9;
-
-    margin-right:10px;
-}
-
-@media(max-width:720px){
-
-    .education-grid{
-        grid-template-columns:1fr;
-    }
-}
-
-
-/* =========================================================
-   CONTACT
-========================================================= */
-
+/* CONTACT */
 .contact{
-    position:relative;
-
-    overflow:hidden;
-
-    padding:60px;
-
-    border:
-        1px solid
-        rgba(155,92,255,.25);
-
+    border:1px solid rgba(155,92,255,.25);
     border-radius:20px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(109,40,217,.12),
-            rgba(34,211,238,.035)
-        );
+    padding:50px;
+    background:linear-gradient(135deg, rgba(109,40,217,.12), rgba(34,211,238,.035));
 }
-
-.contact h2{
-    font-size:
-        clamp(
-            32px,
-            5vw,
-            52px
-        );
-
-    letter-spacing:-2px;
-
-    margin-bottom:15px;
-}
-
-.contact p{
-    color:#9696a2;
-
-    max-width:700px;
-
-    line-height:1.7;
-}
-
-.contact-actions{
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:12px;
-
-    margin-top:27px;
-}
-
-@media(max-width:600px){
-
-    .contact{
-        padding:30px 22px;
-    }
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
+.contact h2{ font-size:clamp(30px, 4vw, 44px); letter-spacing:-1.5px; margin-bottom:15px; }
+.contact p{ color:#9696a2; max-width:700px; line-height:1.7; }
+.contact-actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:25px; }
 
 footer{
-    padding:40px 0 55px;
-
+    padding:40px 0;
     color:#60606c;
-
     font-size:12px;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.06);
-
+    border-top:1px solid rgba(255,255,255,.06);
     text-align:center;
 }
 
-
 /* =========================================================
-   CV PRINT AREA
+   MEDIA QUERIES
 ========================================================= */
-
-#cv-print{
-    display:none;
+@media(max-width:850px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .stats{ grid-template-columns:repeat(2,1fr); }
+    .card-grid, .projects, .education-grid{ grid-template-columns:1fr; }
+    .nav-links{ display:none; }
 }
 
-
 /* =========================================================
-   PRINT
+   PRINT STYLES FOR CV
 ========================================================= */
+#cv-print{ display:none; }
 
 @media print{
-
-    body{
-        background:#fff !important;
-        color:#111 !important;
-    }
-
-    body *{
-        visibility:hidden !important;
-    }
-
-    #cv-print,
-    #cv-print *{
-        visibility:visible !important;
-    }
-
+    body{ background:#fff !important; color:#000 !important; }
+    #boot, #portfolio, nav, footer{ display:none !important; }
     #cv-print{
         display:block !important;
-
         position:absolute;
-
         left:0;
         top:0;
-
         width:100%;
-
         color:#111;
-
         background:#fff;
-
-        font-family:
-            Arial,
-            Helvetica,
-            sans-serif;
-
-        font-size:10.5pt;
-
-        line-height:1.4;
+        font-family:Arial,Helvetica,sans-serif;
+        font-size:10pt;
+        line-height:1.45;
     }
-
-    @page{
-        size:A4;
-        margin:14mm 15mm;
-    }
+    @page{ size:A4; margin:12mm 15mm; }
 }
-
 </style>
 </head>
 
-
 <body>
 
-
-<!-- =======================================================
-     TERMINAL DE ARRANQUE
-======================================================= -->
-
+<!-- TERMINAL BOOT -->
 <div id="boot">
-
     <div class="terminal-window">
-
         <div class="terminal-top">
-
-            <span class="terminal-dot"></span>
-            <span class="terminal-dot"></span>
-            <span class="terminal-dot"></span>
-
-            <span class="terminal-title">
-                MAYRA@PORTAFOLIO — terminal
-            </span>
-
+            <div class="terminal-top-left">
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+                <span class="terminal-dot"></span>
+                <span class="terminal-title">MAYRA@PORTAFOLIO — terminal</span>
+            </div>
+            <button class="skip-btn" onclick="showPortfolio()">[ Saltarse animación ✕ ]</button>
         </div>
-
         <div id="terminal"></div>
-
     </div>
-
 </div>
 
+<noscript>
+    <style>#boot{ display:none !important; } #portfolio{ opacity:1 !important; visibility:visible !important; transform:none !important; }</style>
+</noscript>
 
-<!-- =======================================================
-     PORTAFOLIO
-======================================================= -->
-
+<!-- PORTAFOLIO -->
 <div id="portfolio">
 
-
-<!-- =======================================================
-     NAV
-======================================================= -->
-
 <nav>
-
     <div class="nav-inner">
-
-        <div class="logo">
-            MAYRA<span>BARBOSA</span>
-        </div>
-
+        <div class="logo">MAYRA<span>BARBOSA</span></div>
         <div class="nav-links">
-
-            <a href="#perfil">
-                Perfil
-            </a>
-
-            <a href="#experiencia">
-                Experiencia
-            </a>
-
-            <a href="#habilidades">
-                Habilidades
-            </a>
-
-            <a href="#proyectos">
-                Proyectos
-            </a>
-
-            <a href="#contacto">
-                Contacto
-            </a>
-
+            <a href="#perfil">Perfil</a>
+            <a href="#experiencia">Experiencia</a>
+            <a href="#habilidades">Habilidades</a>
+            <a href="#proyectos">Proyectos</a>
+            <a href="#contacto">Contacto</a>
         </div>
-
-        <button
-            class="nav-button"
-            onclick="restartBoot()">
-
-            ↻ REINICIAR
-
-        </button>
-
+        <button class="nav-button" onclick="restartBoot()">↻ REINICIAR</button>
     </div>
-
 </nav>
 
-
-<!-- =======================================================
-     HERO
-======================================================= -->
-
 <header class="hero">
-
     <div class="container">
-
         <div class="hero-grid">
-
-
             <div>
-
                 <div class="status">
+                    <span class="status-dot"></span>
+                    SISTEMA ONLINE · GUADALAJARA, JALISCO
+                </div>
 
-                    <span 
+                <h1>
+                    <span class="gradient-text">Mayra</span><br>Barbosa
+                </h1>
+
+                <div class="hero-role">
+                    Ingeniera en Sistemas Computacionales <br>
+                    <span style="color:#9b5cff;">Soporte Técnico · Redes · TI</span>
+                </div>
+
+                <p class="hero-description">
+                    Más de 10 años de experiencia en soporte técnico, infraestructura, redes LAN/WAN, 
+                    telecomunicaciones, análisis de datos y coordinación técnica-operativa.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#experiencia" class="btn btn-primary">VER EXPERIENCIA →</a>
+                    <button class="btn btn-secondary" onclick="printCV()">IMPRIMIR / GUARDAR CV</button>
+                </div>
+            </div>
+
+            <!-- HERO PANEL -->
+            <div class="hero-panel">
+                <div class="panel-top">
+                    <span>MAYRA_KERNEL</span>
+                    <span class="panel-status">● ONLINE</span>
+                </div>
+                <div class="panel-code">
+                    <div><span class="purple">const</span> Mayra = <span class="white">{</span></div>
+                    <div>&nbsp;&nbsp;perfil: <span class="cyan">"Ingeniera en Sistemas"</span>,</div>
+                    <div>&nbsp;&nbsp;especialidad: <span class="cyan">"Soporte & Redes"</span>,</div>
+                    <div>&nbsp;&nbsp;experiencia: <span class="green">"10+ años"</span>,</div>
+                    <div>&nbsp;&nbsp;sitios: <span class="green">600+</span>,</div>
+                    <div>&nbsp;&nbsp;tecnologias: <span class="cyan">["MikroTik", "Grandstream", "UCM", "VoIP", "Power BI"]</span></div>
+                    <div><span class="white">};</span></div>
+                </div>
+                <div class="panel-line"></div>
+                <div class="panel-footer">
+                    <span>Guadalajara, MX</span>
+                    <span>TI / NETWORKS</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">10+</div>
+                <div class="stat-label">AÑOS DE EXPERIENCIA</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">600+</div>
+                <div class="stat-label">SITIOS DESPLEGADOS</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">20</div>
+                <div class="stat-label">PERSONAS COORDINADAS</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">TI</div>
+                <div class="stat-label">SOPORTE · REDES · DATOS</div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- PERFIL -->
+<section id="perfil">
+    <div class="container">
+        <div class="section-label">01 · PERFIL</div>
+        <h2 class="section-title">Tecnología con enfoque <span class="gradient-text">práctico.</span></h2>
+        <p class="section-description">
+            Ingeniera en Sistemas Computacionales especializada en soporte técnico preventivo y correctivo, 
+            administración de redes LAN/WAN, telefonía IP y monitoreo de infraestructura con herramientas de datos.
+        </p>
+
+        <div class="card-grid">
+            <div class="card">
+                <h3>Soporte Técnico</h3>
+                <p>Diagnóstico y resolución de incidencias en hardware, sistemas operativos, periféricos y aplicaciones corporativas presencial y remotamente.</p>
+            </div>
+            <div class="card">
+                <h3>Redes & Telecomunicaciones</h3>
+                <p>Configuración y soporte de routers, switches, puntos de acceso, telefonía IP, PBX, Grandstream y MikroTik.</p>
+            </div>
+            <div class="card">
+                <h3>Datos & Reportes</h3>
+                <p>Extracción, análisis y presentación de datos de operaciones y soporte mediante Power BI y Excel para la toma de decisiones.</p>
+            </div>
+            <div class="card">
+                <h3>Coordinación de Operaciones</h3>
+                <p>Gestión de cuadrillas de campo, seguimiento de tickets, control de SLA, proveedores y documentación técnica.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EXPERIENCIA -->
+<section id="experiencia">
+    <div class="container">
+        <div class="section-label">02 · EXPERIENCIA</div>
+        <h2 class="section-title">Trayectoria <span class="gradient-text">profesional.</span></h2>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">2024</div>
+                <h3 class="timeline-title">Desarrollo y Soporte Técnico</h3>
+                <div class="timeline-company">Inttelec Networks</div>
+                <ul>
+                    <li>Soporte remoto para soluciones de telecomunicaciones y redes corporativas.</li>
+                    <li>Diagnóstico y parametrización de routers, puntos de acceso y gateways VoIP.</li>
+                    <li>Administración de PBX y conmutadores IP Grandstream y MikroTik.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2021 — 2023</div>
+                <h3 class="timeline-title">Analista de Operaciones</h3>
+                <div class="timeline-company">HEMAC Teleinformática</div>
+                <ul>
+                    <li>Coordinación de cuadrillas de despliegue para proyectos de conectividad en más de 600 sitios.</li>
+                    <li>Generación de dashboards e indicadores operativos en Power BI y Excel.</li>
+                    <li>Supervisión de entregables de telecomunicaciones y cierre de incidencias de red.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2020 — 2021</div>
+                <h3 class="timeline-title">Soporte Técnico Especializado</h3>
+                <div class="timeline-company">HP</div>
+                <ul>
+                    <li>Diagnóstico de hardware y software en equipos de

@@ -40,7 +40,7 @@ a{
 }
 
 /* =========================================================
-   BOOT TERMINAL
+   BOOT TERMINAL (PANTALLA INICIAL)
 ========================================================= */
 #boot{
     position:fixed;
@@ -55,9 +55,9 @@ a{
 }
 
 #boot.hidden{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
+    opacity:0 !important;
+    visibility:hidden !important;
+    pointer-events:none !important;
 }
 
 .terminal-window{
@@ -66,7 +66,7 @@ a{
     background:#020204;
     border:1px solid #24242d;
     border-radius:12px;
-    box-shadow: 0 0 80px rgba(125,55,255,.12), inset 0 0 50px rgba(255,255,255,.015);
+    box-shadow: 0 0 80px rgba(125,55,255,.15), inset 0 0 50px rgba(255,255,255,.015);
     overflow:hidden;
     display:flex;
     flex-direction:column;
@@ -93,23 +93,27 @@ a{
     height:11px;
     border-radius:50%;
     margin-right:7px;
-    background:#30303a;
 }
+.dot-red{ background:#ff5f56; }
+.dot-yellow{ background:#ffbd2e; }
+.dot-green{ background:#27c93f; }
 
 .terminal-title{
     margin-left:8px;
     color:#666673;
     font-size:12px;
     letter-spacing:1px;
+    font-family:monospace;
 }
 
 .skip-btn{
     background:transparent;
-    border:1px solid #333342;
+    border:1px solid #30303e;
     color:#9b5cff;
-    padding:3px 8px;
-    border-radius:4px;
+    padding:4px 9px;
+    border-radius:5px;
     font-size:11px;
+    font-family:monospace;
     cursor:pointer;
     transition:.2s;
 }
@@ -123,32 +127,44 @@ a{
     flex:1;
     padding:24px;
     overflow-y:auto;
-    font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
-    font-size:14px;
+    font-family:"SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size:13.5px;
     line-height:1.8;
     white-space:pre-wrap;
     color:#a7a7b3;
 }
 
-.terminal-line{ min-height:1.8em; }
-.terminal-line.prompt{ color:#ffffff; }
-.terminal-line.info{ color:#8f8f9b; }
-.terminal-line.success{ color:#8df7cf; text-shadow:0 0 10px rgba(90,255,190,.15); }
+.term-line{ min-height:1.7em; }
+.term-prompt{ color:#ffffff; font-weight:600; }
+.term-info{ color:#8b8b9a; }
+.term-ok{ color:#5eead4; text-shadow:0 0 10px rgba(94,234,212,.2); }
+.term-sys{ color:#c084fc; }
+
+.terminal-cursor{
+    display:inline-block;
+    color:#5eead4;
+    animation:cursor-blink 0.7s infinite;
+}
+
+@keyframes cursor-blink{
+    0%, 100%{ opacity:1; }
+    50%{ opacity:0; }
+}
 
 /* =========================================================
-   PORTFOLIO LAYOUT
+   PORTAFOLIO PRINCIPAL
 ========================================================= */
 #portfolio{
     opacity:0;
     visibility:hidden;
-    transform:translateY(20px);
+    transform:translateY(25px);
     transition: opacity .5s ease, transform .5s ease, visibility .5s ease;
 }
 
 #portfolio.ready{
-    opacity:1;
-    visibility:visible;
-    transform:translateY(0);
+    opacity:1 !important;
+    visibility:visible !important;
+    transform:translateY(0) !important;
 }
 
 #portfolio::before{
@@ -163,12 +179,15 @@ a{
     pointer-events:none;
 }
 
+/* =========================================================
+   NAV
+========================================================= */
 nav{
     position:sticky;
     top:0;
     z-index:1000;
     backdrop-filter:blur(18px);
-    background:rgba(5,5,10,.72);
+    background:rgba(5,5,10,.75);
     border-bottom:1px solid rgba(255,255,255,.07);
 }
 
@@ -202,8 +221,8 @@ nav{
     padding:8px 14px;
     border-radius:8px;
     cursor:pointer;
-    transition:.25s;
     font-size:12px;
+    transition:.25s;
 }
 
 .nav-button:hover{
@@ -211,8 +230,11 @@ nav{
     box-shadow: 0 0 20px rgba(155,92,255,.25);
 }
 
+/* =========================================================
+   LAYOUT GLOBAL
+========================================================= */
 .container{ width:min(1180px,92%); margin:auto; }
-section{ padding:90px 0; }
+section{ padding:85px 0; }
 
 .section-label{
     color:#9b5cff;
@@ -224,7 +246,7 @@ section{ padding:90px 0; }
 }
 
 .section-title{
-    font-size:clamp(30px,5vw,48px);
+    font-size:clamp(30px,5vw,46px);
     line-height:1.05;
     letter-spacing:-1.8px;
     margin-bottom:18px;
@@ -234,10 +256,12 @@ section{ padding:90px 0; }
     max-width:720px;
     color:#92929d;
     line-height:1.8;
-    font-size:16px;
+    font-size:15.5px;
 }
 
-/* HERO */
+/* =========================================================
+   HERO
+========================================================= */
 .hero{ min-height:calc(100vh - 68px); display:flex; align-items:center; padding:70px 0; }
 .hero-grid{ display:grid; grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr); gap:60px; align-items:center; }
 
@@ -253,15 +277,16 @@ section{ padding:90px 0; }
     font-size:11px;
     letter-spacing:1.4px;
     margin-bottom:24px;
+    font-family:monospace;
 }
 
 .status-dot{ width:7px; height:7px; border-radius:50%; background:#22d3ee; box-shadow:0 0 12px #22d3ee; }
 
 .hero h1{
-    font-size:clamp(45px, 8vw, 95px);
+    font-size:clamp(48px, 8vw, 96px);
     line-height:.95;
     letter-spacing:-4px;
-    margin-bottom:25px;
+    margin-bottom:24px;
     font-weight:900;
 }
 
@@ -272,8 +297,8 @@ section{ padding:90px 0; }
     color:transparent;
 }
 
-.hero-role{ font-size:clamp(18px, 2.5vw, 28px); line-height:1.3; color:#dddde5; margin-bottom:20px; }
-.hero-description{ max-width:700px; color:#9797a4; line-height:1.8; font-size:16px; }
+.hero-role{ font-size:clamp(19px, 2.5vw, 29px); line-height:1.3; color:#dddde5; margin-bottom:20px; }
+.hero-description{ max-width:700px; color:#9797a4; line-height:1.8; font-size:15.5px; }
 .hero-actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:32px; }
 
 .btn{
@@ -288,7 +313,7 @@ section{ padding:90px 0; }
     background:#111118;
     color:#fff;
     cursor:pointer;
-    font-size:14px;
+    font-size:13.5px;
     transition: transform .2s, border .2s, box-shadow .2s;
 }
 
@@ -306,7 +331,7 @@ section{ padding:90px 0; }
 
 .btn-secondary{ background:rgba(255,255,255,.03); }
 
-/* TERMINAL CARD */
+/* TERMINAL CARD HERO */
 .hero-panel{
     border:1px solid rgba(155,92,255,.22);
     background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.015));
@@ -317,7 +342,7 @@ section{ padding:90px 0; }
 
 .panel-top{ display:flex; justify-content:space-between; margin-bottom:20px; color:#777783; font-family:monospace; font-size:11px; }
 .panel-status{ color:#70e8bb; }
-.panel-code{ font-family:"SFMono-Regular",Consolas,monospace; font-size:12px; line-height:1.9; color:#92929e; }
+.panel-code{ font-family:"SFMono-Regular", Consolas, monospace; font-size:12px; line-height:1.9; color:#92929e; }
 .panel-code .purple{ color:#b28aff; }
 .panel-code .cyan{ color:#5de5f3; }
 .panel-code .green{ color:#76e7ba; }
@@ -383,6 +408,7 @@ section{ padding:90px 0; }
     background:rgba(255,255,255,.025);
     color:#b4b4bf;
     font-size:13px;
+    transition:.2s;
 }
 .skill:hover{ color:#fff; border-color:rgba(34,211,238,.35); background:rgba(34,211,238,.04); }
 
@@ -390,7 +416,7 @@ section{ padding:90px 0; }
 .project-tag{ color:#8f82bd; font-size:11px; letter-spacing:.8px; font-family:monospace; }
 .project-number{ font-family:monospace; color:#6f6f7a; font-size:11px; margin-bottom:30px; }
 
-/* CERTIFICATIONS */
+/* CERTIFICACIONES */
 .cert-list{ margin-top:25px; display:grid; gap:10px; }
 .cert{
     padding:14px 16px;
@@ -402,7 +428,7 @@ section{ padding:90px 0; }
 }
 .cert::before{ content:"✓ "; color:#75e5b9; margin-right:8px; }
 
-/* CONTACT */
+/* CONTACTO */
 .contact{
     border:1px solid rgba(155,92,255,.25);
     border-radius:20px;
@@ -421,9 +447,6 @@ footer{
     text-align:center;
 }
 
-/* =========================================================
-   MEDIA QUERIES
-========================================================= */
 @media(max-width:850px){
     .hero-grid{ grid-template-columns:1fr; }
     .stats{ grid-template-columns:repeat(2,1fr); }
@@ -432,7 +455,7 @@ footer{
 }
 
 /* =========================================================
-   PRINT STYLES FOR CV
+   ESTILOS DE IMPRESIÓN CV
 ========================================================= */
 #cv-print{ display:none; }
 
@@ -447,7 +470,7 @@ footer{
         width:100%;
         color:#111;
         background:#fff;
-        font-family:Arial,Helvetica,sans-serif;
+        font-family:Arial,sans-serif;
         font-size:10pt;
         line-height:1.45;
     }
@@ -458,27 +481,34 @@ footer{
 
 <body>
 
-<!-- TERMINAL BOOT -->
+<!-- =======================================================
+     TERMINAL INICIAL DE ARRANQUE
+======================================================= -->
 <div id="boot">
     <div class="terminal-window">
         <div class="terminal-top">
             <div class="terminal-top-left">
-                <span class="terminal-dot"></span>
-                <span class="terminal-dot"></span>
-                <span class="terminal-dot"></span>
+                <span class="terminal-dot dot-red"></span>
+                <span class="terminal-dot dot-yellow"></span>
+                <span class="terminal-dot dot-green"></span>
                 <span class="terminal-title">MAYRA@PORTAFOLIO — terminal</span>
             </div>
-            <button class="skip-btn" onclick="showPortfolio()">[ Saltarse animación ✕ ]</button>
+            <button class="skip-btn" onclick="finishBoot()">[ Salir de animación ✕ ]</button>
         </div>
         <div id="terminal"></div>
     </div>
 </div>
 
 <noscript>
-    <style>#boot{ display:none !important; } #portfolio{ opacity:1 !important; visibility:visible !important; transform:none !important; }</style>
+    <style>
+        #boot{ display:none !important; }
+        #portfolio{ opacity:1 !important; visibility:visible !important; transform:none !important; }
+    </style>
 </noscript>
 
-<!-- PORTAFOLIO -->
+<!-- =======================================================
+     PORTAFOLIO
+======================================================= -->
 <div id="portfolio">
 
 <nav>
@@ -514,17 +544,16 @@ footer{
                 </div>
 
                 <p class="hero-description">
-                    Más de 10 años de experiencia en soporte técnico, infraestructura, redes LAN/WAN, 
-                    telecomunicaciones, análisis de datos y coordinación técnica-operativa.
+                    Más de 10 años de experiencia en soporte técnico, infraestructura tecnológica, redes LAN/WAN, 
+                    telecomunicaciones, análisis de datos y coordinación técnica de despliegues.
                 </p>
 
                 <div class="hero-actions">
                     <a href="#experiencia" class="btn btn-primary">VER EXPERIENCIA →</a>
-                    <button class="btn btn-secondary" onclick="printCV()">IMPRIMIR / GUARDAR CV</button>
+                    <button class="btn btn-secondary" onclick="window.print()">IMPRIMIR / GUARDAR CV</button>
                 </div>
             </div>
 
-            <!-- HERO PANEL -->
             <div class="hero-panel">
                 <div class="panel-top">
                     <span>MAYRA_KERNEL</span>
@@ -547,7 +576,6 @@ footer{
             </div>
         </div>
 
-        <!-- STATS -->
         <div class="stats">
             <div class="stat">
                 <div class="stat-number">10+</div>
@@ -569,38 +597,36 @@ footer{
     </div>
 </header>
 
-<!-- PERFIL -->
 <section id="perfil">
     <div class="container">
         <div class="section-label">01 · PERFIL</div>
         <h2 class="section-title">Tecnología con enfoque <span class="gradient-text">práctico.</span></h2>
         <p class="section-description">
-            Ingeniera en Sistemas Computacionales especializada en soporte técnico preventivo y correctivo, 
+            Ingeniera en Sistemas Computacionales con más de 10 años de experiencia en soporte técnico preventivo y correctivo, 
             administración de redes LAN/WAN, telefonía IP y monitoreo de infraestructura con herramientas de datos.
         </p>
 
         <div class="card-grid">
             <div class="card">
                 <h3>Soporte Técnico</h3>
-                <p>Diagnóstico y resolución de incidencias en hardware, sistemas operativos, periféricos y aplicaciones corporativas presencial y remotamente.</p>
+                <p>Diagnóstico y resolución de incidencias en hardware, sistemas operativos, periféricos y aplicaciones presencial y remotamente.</p>
             </div>
             <div class="card">
                 <h3>Redes & Telecomunicaciones</h3>
-                <p>Configuración y soporte de routers, switches, puntos de acceso, telefonía IP, PBX, Grandstream y MikroTik.</p>
+                <p>Soporte de routers, switches, puntos de acceso, telefonía IP, PBX, Grandstream y MikroTik.</p>
             </div>
             <div class="card">
                 <h3>Datos & Reportes</h3>
-                <p>Extracción, análisis y presentación de datos de operaciones y soporte mediante Power BI y Excel para la toma de decisiones.</p>
+                <p>Organización y análisis de información operativa con Power BI y Excel para indicadores, métricas y reportes ejecutivos.</p>
             </div>
             <div class="card">
-                <h3>Coordinación de Operaciones</h3>
-                <p>Gestión de cuadrillas de campo, seguimiento de tickets, control de SLA, proveedores y documentación técnica.</p>
+                <h3>Coordinación Operativa</h3>
+                <p>Seguimiento de cuadrillas en campo, atención a incidencias, control de proveedores y documentación técnica de infraestructura.</p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- EXPERIENCIA -->
 <section id="experiencia">
     <div class="container">
         <div class="section-label">02 · EXPERIENCIA</div>
@@ -612,26 +638,10 @@ footer{
                 <h3 class="timeline-title">Desarrollo y Soporte Técnico</h3>
                 <div class="timeline-company">Inttelec Networks</div>
                 <ul>
-                    <li>Soporte remoto para soluciones de telecomunicaciones y redes corporativas.</li>
-                    <li>Diagnóstico y parametrización de routers, puntos de acceso y gateways VoIP.</li>
-                    <li>Administración de PBX y conmutadores IP Grandstream y MikroTik.</li>
+                    <li>Soporte remoto para soluciones corporativas de telecomunicaciones y conectividad.</li>
+                    <li>Diagnóstico y configuración de routers, puntos de acceso y gateways de telefonía IP.</li>
+                    <li>Soporte a conmutadores IP Grandstream, MikroTik, UCM y PBX.</li>
                 </ul>
             </div>
 
-            <div class="timeline-item">
-                <div class="timeline-date">2021 — 2023</div>
-                <h3 class="timeline-title">Analista de Operaciones</h3>
-                <div class="timeline-company">HEMAC Teleinformática</div>
-                <ul>
-                    <li>Coordinación de cuadrillas de despliegue para proyectos de conectividad en más de 600 sitios.</li>
-                    <li>Generación de dashboards e indicadores operativos en Power BI y Excel.</li>
-                    <li>Supervisión de entregables de telecomunicaciones y cierre de incidencias de red.</li>
-                </ul>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-date">2020 — 2021</div>
-                <h3 class="timeline-title">Soporte Técnico Especializado</h3>
-                <div class="timeline-company">HP</div>
-                <ul>
-                    <li>Diagnóstico de hardware y software en equipos de
+         
